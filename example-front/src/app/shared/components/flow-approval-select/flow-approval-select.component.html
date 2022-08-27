@@ -1,0 +1,18 @@
+<div>
+  <label class="label" id="supplier-label">Fluxo de Aprovação</label>
+  <p-dropdown class="full-width" id="id-flow-approval-select"
+  [formControl]="control"
+  [options]="idFlowApproval"
+  placeholder="Selecione..."
+  emptyFilterMessage="Nenhum ID encontrado"
+  emptyMessage="Nenhum ID encontrado"
+  [showClear]="true"
+  optionLabel="label">
+    <ng-template let-option pTemplate="item">
+      <div class="option-item" id="id-flow-approval-option">
+        <div>{{option.label}}</div>
+      </div>
+    </ng-template>
+  </p-dropdown>
+</div>
+

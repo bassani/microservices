@@ -1,0 +1,83 @@
+<div class="p-d-flex p-flex-column p-ml-1" (click)="showModal()">
+    <div class="p-d-flex">
+      <em class="pi pi-pencil"></em>
+      <div class="p-text p-ml-1 p-filter-text">Fabricantes</div>
+    </div>
+  
+    <div class="p-text hint-text" id="current-manufacturer-selected">
+
+      <div *ngIf="!!(control.value?.length); else noManufacturer">
+        <span id="manufacturer-selected">{{control.value?.length || 0}} fabricantes selecionados</span>
+      </div>
+      <ng-template #noManufacturer>
+        Nenhum fabricante selecionado
+      </ng-template>
+    </div>
+  
+</div>
+  
+  <p-dialog id="manufacturer-dialog" [(visible)]="displayModal" position="top"
+    [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="header">
+      <div class="p-grid">
+        <div class="p-col-12 rd-dialog-title">Filtrar fabricantes</div>
+        <div class="p-col-12 rd-dialog-subtitle">Pesquise por nome, código do fornecedor ou insira uma lista de códigos separados por " ; " (ponto e vírgula)
+        </div>
+        <div class="p-grid full-width">
+          <div class="p-col-12 p-d-flex p-flex-column full-width">
+              <label id="manufacturer-label">Fabricante</label>
+              <p-autoComplete class="p-col-12 full-width" id="manufacturer-select" (onSelect)="selected()" [formControl]="filterControl" placeholder="Selecione os fabricantes..."
+              [suggestions]="(manufacturers$ | async) || []" (completeMethod)="search($event)" [multiple]="false" field="name">
+                  <ng-template let-option pTemplate="filter">
+                      <div class="manufacturer-item">
+                          <div>
+                              {{option.id}} - {{option.name}}
+                          </div>
+                      </div>
+                  </ng-template>
+              </p-autoComplete>
+              <small *ngIf="(separatorErrorList$ | async)?.length" class="p-error p-pl-3">{{errors | async}}</small>
+          </div>
+        </div>
+      </div>
+      
+    </ng-template>
+    
+    <div class="p-grid">
+      <div *ngIf="!(manufacturersControl.value?.length);else hasItems" class="empty-filter">
+        Nenhum fabricante selecionado
+      </div>
+      <ng-template #hasItems>
+      <div class="p-col-12 p-d-flex p-flex-column full-width">
+          <table aria-describedby="lista de fabricantes selecionados">
+            <thead>
+              <th scope="th_manufacturer_id" class="text-left">Cod.</th>
+              <th scope="th_manufacturer_name" class="text-left">Fabricante</th>
+              <th scope="th_manufacturer_action" class="text-end">Ações</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of manufacturersControl.value || []">
+                <td class="text-left">{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td id="action-cell" class="text-end">   
+                  <button (click)="removeManufacturer(item)" id="remove-button" class="btn-modal p-button-danger p-button-rounded" pButton type="button" icon="pi pi-times"
+                  iconPos="left"></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </ng-template>
+    </div>
+  
+    <p-footer>
+      <div class="p-d-flex p-jc-end button-grid p-mr-3">
+        <button pButton pRipple type="button" (click)="closeModal()" label="Cancelar"
+          class="btn btn-close p-button-rounded p-button-danger" id="manufacturer-modal-close"></button>
+        <button pButton pRipple type="button" (click)="save()" label="Salvar" class="btn btn-save p-button-success p-button-rounded"
+          id="manufacturer-modal-save"></button>
+      </div>
+    </p-footer>
+  
+  </p-dialog>
+  

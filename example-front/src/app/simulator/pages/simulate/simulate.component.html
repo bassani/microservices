@@ -1,0 +1,38 @@
+<div class="card-container">
+
+  <!-- Título e subtitulo da tela -->
+  <div class="p-text p-mb-3 simulation-title">
+    <strong>Nova simulação</strong>
+  </div>
+  <div class="p-text p-mb-6">
+    <small class="small-title">Preencha os campos abaixo para realizar a simulação.</small>
+  </div>
+  <p-card class="simulation-content">
+    <div class="p-text simulation-data">Dados da simulação</div>
+    <!-- Aqui vai os componentes com serviço chamando dados do back-end em cada um deles-->
+    <div class="p-grid">
+      <app-cd-select id="cd-select" class="p-col-4" [control]="getControl('distributionCenters')"></app-cd-select>
+      <app-order-type id="order-type-select" class="p-col-4" [control]="getControl('orderType')"></app-order-type>
+      <app-supplier id="track-supplier-select" class="p-col-4" [control]="getControl('suppliers')">
+      </app-supplier>
+      <app-manufacturer-select id="track-manufacturer-select" [parentControl]="getControl('suppliers')" [control]="getControl('manufacturer')" class="p-col-4">
+      </app-manufacturer-select>
+      <app-category id="category-subcategory" [category]="getControl('category')"
+        [subcategory]="getControl('subcategory')" [manufacturer]="getControl('manufacturer')"
+        class="p-col-8 paddingless"></app-category>
+      <app-classification id="classification-select" class="p-col-4" [control]="getControl('classification')">
+      </app-classification>
+  
+    </div>
+
+    <!-- Botões de limpar campos e de iniciar simulação -->
+    <div class="p-d-flex p-jc-end button-grid">
+      <button pButton pRipple type="button" label="Limpar Campos" (click)="form.reset()" class="btn p-button-rounded  p-button-white"
+        id="clean-button"></button>
+      <button pButton pRipple type="submit" (click)="startSimulation()" label="Continuar"
+        class="btn p-button-success" id="start-button"></button>
+    </div>
+
+  </p-card>
+
+</div>

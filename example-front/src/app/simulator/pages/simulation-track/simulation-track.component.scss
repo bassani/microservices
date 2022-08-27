@@ -1,0 +1,72 @@
+:host::ng-deep.p-card {
+  margin: 30px 12px;
+  margin-top: 50px;
+  width: auto;
+  margin-left: 30px;
+  background: #ffffff;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+
+:host::ng-deep.simulation-content {
+  & .p-card-body {
+    padding: 32px;
+  }
+  & .p-card-content {
+    padding: 0px;
+  }
+}
+
+.button-grid {
+  margin-top: 32px;
+  grid-column-gap: 24px;
+}
+
+.chip {
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  border-radius: 20px;
+  border: none !important;
+  min-width: 80px;
+
+}
+
+.small-spinner {
+  width: 16px; height: 16px
+}
+
+.chip-error {
+  background-color: #D40000;
+}
+
+.th-grid {
+  font-size: 12px;
+}
+.pointer {
+  cursor: pointer;
+}
+
+.detailing {
+  color: var(--primary-color)
+}
+.simulation-data {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #4f4f4f;
+}
+
+.td-grid {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #000000;
+}

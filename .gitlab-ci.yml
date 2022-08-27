@@ -1,0 +1,104 @@
+image: maven:3-jdk-8
+
+stages:
+- build
+- test
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version"
+  CACHE_KEY: $CI_COMMIT_REF_SLUG
+
+
+cache:
+  key: $CACHE_KEY
+  paths:
+   - .m2/repository
+   - .sbt
+
+include:
+  - local: example-model-lib/.gitlab-ci.yml
+  - local: example-front/.gitlab-ci.yml
+  - local: example-bff/.gitlab-ci.yml
+  - local: example-core/.gitlab-ci.yml
+  - local: example-compose/.gitlab-ci.yml
+  - local: example-order/.gitlab-ci.yml
+
+
+.test-module:
+  stage: test
+  script:
+   - echo "Testing $MODULE"
+   - mvn $MAVEN_CLI_OPTS -pl $MODULE test --also-make
+
+.build-module:
+  stage: build
+  script:
+  - echo "Building $MODULE"
+  - mvn -pl $MODULE clean compile --also-make
+  artifacts:
+    expire_in: 10 min
+    paths:
+    - "*/target"
+
+# BUILD JOBS
+build-model-lib-module:
+  extends:
+  - .model-lib-module
+  - .build-module
+
+build-front-module:
+  extends:
+  - .front-module
+  - .build-module
+
+build-bff-module:
+  extends:
+  - .bff-module
+  - .build-module
+
+build-core-module:
+  extends:
+  - .core-module
+  - .build-module
+
+build-compose-module:
+  extends:
+  - .compose-module
+  - .build-module
+
+build-order-module:
+  extends:
+    - .order-module
+    - .build-module
+
+# TEST JOBS
+test-model-lib-module:
+  extends:
+  - .model-lib-module
+  - .test-module
+
+test-front-module:
+  extends:
+  - .front-module
+  - .test-module
+
+test-bff-module:
+  extends:
+  - .bff-module
+  - .test-module
+
+test-core-module:
+  extends:
+  - .core-module
+  - .test-module
+
+test-compose-module:
+  extends:
+  - .compose-module
+  - .test-module
+
+test-order-module:
+  extends:
+  - .order-module
+  - .test-module

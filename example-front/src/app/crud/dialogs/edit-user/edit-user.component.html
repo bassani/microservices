@@ -1,0 +1,88 @@
+<div [formGroup]="form">
+    <div>
+        <div class="p-d-flex p-flex-column p-flex-md-row">
+            <div class="p-col-4">
+                <div>
+                    <label id="classification-label-fullName" class="label p-ml-2">Nome</label>
+                </div>
+                <input class="input-full" id="classification-fullName-input" placeholder="Digite o Nome e Sobrenome" name="fullName" type="text" formControlName="fullName" pInputText>
+            </div>
+            <div class="p-col-3">
+                <div>
+                    <label id="classification-label-name" class="label p-ml-2">Matrícula</label>
+                </div>
+                <input class="input-full" id="classification-registerNumber-input" placeholder="Matrícula" name="registrationNumber"  formControlName="registrationNumber" pInputText>
+                <div *ngIf="form.get('registrationNumber')?.dirty && !!form.get('registrationNumber')?.invalid" class="p-invalid">
+                    <small *ngIf="form.get('registrationNumber')?.errors?.pattern">Digite apenas números.</small>
+                    <small *ngIf="form.get('registrationNumber')?.errors?.maxlength">Limite máx de 20 caracteres.</small>
+                </div>
+            </div>
+            <div class="p-col-5">                                                                                                                                           
+                <div>
+                    <label id="classification-label-name" class="label p-ml-2">E-mail</label>
+                </div>
+                <input class="input-full" id="classification-name-input" placeholder="example@example.com" name="email" type="email" formControlName="email" pInputText>
+                <small *ngIf="form.get('email')?.value !== '' && form.get('email')?.dirty && !!form.get('email')?.invalid" class="p-invalid">E-mail
+                inválido</small>
+            </div>
+        </div>
+        <div class="p-d-flex p-flex-column p-flex-md-row">
+            <div class="p-col-4">
+                <label class="label">Cargo</label>
+                <p-dropdown id="cargo-input" placeholder="Cargo" class="input-full"
+                  optionLabel="name" formControlName="groupId"
+                  [options]="(positions$ | async) || []"  optionValue="id" appendTo="body">
+                  <ng-template let-option pTemplate="item">
+                    <div id="position-option">
+                      <div>{{option.name}}</div>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+            </div>
+            <div class="p-col-4">
+                <div>
+                    <label id="classification-label-status" class="label p-ml-2">Área</label>
+                </div>
+                <p-dropdown id="classification-status-input" [options]="options" placeholder="Selecione" optionLabel="label"
+                    optionValue="value"  formControlName="areaCode">
+                </p-dropdown>
+            </div>
+            <div class="p-col-4">                                                                                                                                           
+                <div>
+                    <label id="classification-label-name" class="label p-ml-2">Telefone</label>
+                </div>
+                <input class="input-full" id="classification-name-input" placeholder="Telefone" name="phoneNumber" type="email" formControlName="phoneNumber" pInputText>
+                <div *ngIf="form.get('phoneNumber')?.dirty && !!form.get('phoneNumber')?.invalid" class="p-invalid">
+                    <small *ngIf="form.get('phoneNumber')?.errors?.pattern">Digite apenas números.</small>
+                    <small *ngIf="form.get('phoneNumber')?.errors?.maxlength">Limite máx de 12 caracteres.</small>
+                </div>
+            </div>
+        </div>
+        <div class="p-d-flex p-flex-column p-flex-md-row">
+            <div class="p-col-4">
+                <label class="label">Perfil de Acesso</label>
+                <p-dropdown appendTo="body" id="classification-status-input" [options]="optionsAcessProfile" placeholder="Selecione" optionLabel="label"
+                    optionValue="value"  formControlName="accessProfile" [disabled]="disableButton()">
+                </p-dropdown>
+            </div>
+            <div class="p-col-3">
+                <div>
+                    <label id="classification-label-status" class="label p-ml-2">Status</label>
+                </div>
+                <p-dropdown appendTo="body" id="classification-status-input" [options]="optionsStatus" placeholder="Selecione" optionLabel="label"
+                    optionValue="value"  formControlName="activationStatus" [disabled]="disableButton()">
+                </p-dropdown>
+            </div>
+            <div class="p-col-3">                                                                                                                                           
+                <label class="label" for="vacationReturnDate">Ausência de férias até</label>
+                <p-calendar appendTo="body" placeholder="Selecione data final" id="vacationReturnDate-on-calendar"
+                  dateFormat="dd/mm/yy" formControlName="vacationReturnDate" name="vacationReturnDate" [showIcon]="true"
+                  icon="pi pi-calendar">
+                </p-calendar>           
+            </div>
+            <div class="p-col-1">                                                                                                                                           
+                <button (click)="confirmButton()" pButton pRipple label="Confirmar" name="confirmar" class="p-button-success p-button-rounded btn-confirm" id="confirm-button-save" role="button"></button>          
+            </div>
+        </div>
+    </div>
+</div>

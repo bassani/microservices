@@ -1,0 +1,39 @@
+.label {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  margin: 6px 8px;
+}
+
+.small-card {
+  margin-left: 10px;
+  max-width: 18rem;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 14px;
+  color: #767676;
+}
+
+.small-manufacturer {
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.paddingless {
+  padding: 0px;
+}
+
+::ng-deep.full-width {
+  .p-multiselect.p-component{
+    width: 100%;
+  }
+}
+
+:host::ng-deep.p-multiselect-item {
+  min-height: 50px;
+}

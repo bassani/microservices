@@ -1,0 +1,18 @@
+<!-- Título e subtitulo da tela -->
+<div class="p-text p-mb-3 simulation-title" *ngIf="simulation">
+    <strong id="simulate-title">Simulação #{{simulation?.id}} - {{simulation.registerDate | date: 'dd/MM/yy'}}</strong>
+</div>
+  <div class="p-text p-d-flex p-flex-column p-mb-5" *ngIf="simulation">
+    <small class="small-title">{{subtitle}}</small>
+    <small class="small-title">Simulação do tipo <strong class="small-manufacturer"
+        id="resume-simulation-type">{{simulation.simulationType.title}}</strong> com a
+      classificação
+      <strong class="small-manufacturer" id="resume-classification">{{simulation.classification?.name}}</strong> e tipo de pedido <strong
+        class="small-manufacturer" id="resume-order-type">{{simulation.orderType?.name}}</strong> para o{{plural(simulation.distributionCenters)}}
+      CD{{plural(simulation.distributionCenters)}} <strong
+      class="small-manufacturer" id="resume-dc">{{(cds | async)?.length == simulation.distributionCenters.length ? 'Todos' : cdList}}</strong>
+      e o{{plural(simulation.suppliers)}} Fabricante{{plural(simulation.suppliers)}} <strong class="small-manufacturer" id="resume-manufacturer">{{simulation.suppliers && simulation.suppliers.length && simulation.suppliers.length > 0 ? manufacturerList : 'Todos'}}</strong>, de categoria <strong
+        class="small-manufacturer" id="resume-category">{{category}}</strong> e Subcategoria
+      <strong class="small-manufacturer" id="resume-subcategory">{{subcategory}}</strong></small>
+  </div>
+  

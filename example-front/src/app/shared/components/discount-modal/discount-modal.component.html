@@ -1,0 +1,148 @@
+<div class="p-d-flex p-flex-column p-ml-1" (click)="showModal()">
+
+  <div class="p-d-flex">
+    <em class="pi pi-pencil"></em>
+    <div class="p-text discounts p-ml-1">Descontos</div>
+  </div>
+
+  <div class="p-text hint-text" id="current-discount-applied">
+    <div *ngIf="control.value.discount || control.value.skus?.length > 0; else noDiscount">
+      <span id="discount-per-product" *ngIf="control.value.discountType === DISCOUNT.PER_PRODUCT; else discountAsAWhole">Desconto aplicado para {{control.value.skus.length}} produtos</span>
+      <ng-template #discountAsAWhole><span id="discount-as-a-whole">{{control?.value.discountType === DISCOUNT.ADD ? 'Desconto adicional de' : 'Novo desconto de'}} {{control.value?.discount}}%
+      para Todos os produtos</span></ng-template>
+    </div>
+    <ng-template #noDiscount>
+      Nenhum desconto aplicado
+    </ng-template>
+  </div>
+
+</div>
+
+<p-dialog id="dicount-dialog" header="Editar Descontos" [(visible)]="displayModal" position="top"
+  [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+
+  <p-tabView (onChange)="changeTab($event)">
+    <p-tabPanel id="all-products-discount" header="Todos os produtos">
+      <div [formGroup]="discountForm">
+      <div class="p-d-flex p-col" >
+        <div class="p-field-checkbox">
+          <p-radioButton formControlName="discountType" [inputId]="'substituir'" name="discountType"
+            id="discount-options-overwrite-all" [value]="DISCOUNT.REPLACE"></p-radioButton>
+          <label [for]="DISCOUNT.REPLACE">Substituir</label>
+        </div>
+        <div class="p-field-checkbox">
+          <p-radioButton formControlName="discountType" [inputId]="'adicionar'" name="discountType"
+            id="discount-options-add-all" [value]="DISCOUNT.ADD"></p-radioButton>
+          <label [for]="DISCOUNT.ADD">Adicionar</label>
+        </div>
+      </div>
+
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-9 col-md-10 col-lg-10 col-sm-8">
+          <label>Produto</label>
+          <div class="p-inputgroup">
+            <input pInputText id="discount-all-products-disabled" [disabled]="true"  [ngModelOptions]="{standalone: true}" [ngModel]="'TODOS OS PRODUTOS DA SIMULAÇÃO'">
+          </div>
+        </div>
+
+        <div class="p-field p-col" *ngVar="discountForm.get('discount') as discount">
+          <label>Desconto</label>
+          <div class="p-inputgroup grouped">
+            <p-inputNumber id="discount-all-input" mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2" formControlName="discount" [min]="0.00" [max]="100.00" ></p-inputNumber>
+            <span class="p-inputgroup-addon">%</span>
+          </div>
+          <small *ngIf="discount.invalid && (discount.dirty || discount.touched)" id="invalid-discount-error" class="p-error">Desconto deve ser maior a 0 e menor a 100.</small>
+
+        </div>
+
+      </div>
+    </div>
+    </p-tabPanel>
+
+    <p-tabPanel id="by-product-discount" header="Por produto">
+      <div class="p-d-flex p-col" [formGroup]="discountForm">
+        <div class="p-field-checkbox">
+          <p-radioButton formControlName="discountType" [inputId]="'substituir'" id="discount-options-overwrite"
+            [value]="DISCOUNT.REPLACE"></p-radioButton>
+          <label [for]="DISCOUNT.REPLACE">Substituir desconto atual</label>
+        </div>
+
+        <div class="p-field-checkbox" [formGroup]="discountForm">
+          <p-radioButton formControlName="discountType" [inputId]="'adicionar'"
+            id="discount-options-overwrite" [value]="DISCOUNT.ADD"></p-radioButton>
+          <label [for]="DISCOUNT.ADD">Adicionar ao desconto atual</label>
+        </div>
+      </div>
+
+      <div class="p-fluid p-grid p-jc-between" [formGroup]="etherealForm">
+
+        <div class="p-col-7" >
+          <app-product 
+          [control]="getProductControl('product')"
+          [suppliers]="simulation.suppliers || []"
+          [categories]="simulation.category || []"
+          [subcategories]="simulation.subcategory || []"
+          ></app-product>
+        </div>
+
+        <div class="p-col-3 p-d-flex p-grid" *ngVar="etherealForm.get('discount') as discount">
+          <label class="label">Desconto</label>
+          <div class="p-inputgroup grouped">
+            <p-inputNumber formControlName="discount" id="discount-products-input" mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2" [min]="0" [max]="100"></p-inputNumber>
+            <span class="p-inputgroup-addon">%</span>
+          </div>
+          <small *ngIf="discount.invalid && (discount.dirty || discount.touched)" id="invalid-discount-error" class="p-error">Desconto deve ser maior a 0 e menor a 100.</small>
+
+        </div>
+
+        <div class="p-col-1">
+          <button [disabled]="etherealForm.invalid" class="btn-modal p-button-secondary p-button-rounded" pButton type="button" icon="pi pi-plus"
+            iconPos="left" (click)="addProductDisctount()"></button>
+        </div>
+
+      </div>
+
+      <div class="p-fluid p-grid p-jc-between gray-table p-mt-4">
+
+        <table class="p-col-12 p-lg-12 p-md-12" aria-describedby="tabela de desconto por produto">
+          <thead>
+            <th scope="th_product_name" colspan="2" class="text-start">Produto</th>
+            <th scope="th_product_type" scope="" class="text-center">Tipo</th>
+            <th scope="th_product_discount" class="text-center">Desconto</th>
+            <th scope="th_product_action" class="text-end">Excluir</th>
+          </thead>
+          <tbody>
+            <tr [id]="'product-row-' + product.skuId" *ngFor="let product of perProducts">
+              <td class="text-start" colspan="2">{{product.name}}</td>
+              <td class="text-center">{{product.discountType == DISCOUNT.ADD ? 'adicionar' : 'substituir'}}</td>
+              <td class="text-center">{{product.discount}}</td>
+              <td id="action-cell" class="text-end">   
+                <button (click)="removeProductDiscount(product)" id="remove-button" class="btn-modal p-button-danger p-button-rounded" pButton type="button" icon="pi pi-times"
+                iconPos="left"></button>
+              </td>
+            </tr>
+            <tr *ngIf="perProducts.length < 1">
+              <td colspan="5">
+                <div class="full-width p-d-flex p-flex-column p-ai-center p-jc-center wrapper-table-empty">
+                  <span class="empty-title p-m-4">Nenhum desconto aplicado</span>
+                  <span class="empty-description p-col-8 p-col-lg-8 p-col-md-8">Insira os dados e clique no + para adicionar ou substituir um desconto</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+
+    </p-tabPanel>
+  </p-tabView>
+
+  <p-footer>
+    <div class="p-d-flex p-jc-end button-grid p-mr-3">
+      <button pButton pRipple type="button" (click)="closeModal()" label="Cancelar"
+        class="btn btn-close p-button-rounded" id="discount-modal-close"></button>
+      <button pButton pRipple type="button" (click)="save()" label="Salvar" class="btn btn-save p-button-success"
+        id="discount-modal-save"></button>
+    </div>
+  </p-footer>
+
+</p-dialog>

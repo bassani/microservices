@@ -1,0 +1,75 @@
+::ng-deep.terms-dropdown>.p-dropdown {
+    width: 100% !important;
+  }
+  .list-wrapper {
+    background: #f4f4f4;
+    width: 100%;
+  }
+  .full-width {
+    width: 100%
+  }
+    :host ::ng-deep .ui-listbox {
+      width: 20em;
+    }
+    .field-radiobutton {
+      margin: 0px 6px !important;
+    }
+    .country-item {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+::ng-deep.listbox-wrapper {
+    position: absolute;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
+    z-index: 9999;
+    .p-dropdown-clear-icon {
+        position: relative;
+        margin-top: 0.7rem;
+        top: auto;
+        right: 0;
+    }
+
+}
+.clear-button {
+    position: absolute;
+    right: 0px !important;
+    top: 5px;
+    background: none;
+    box-shadow: none;
+    border-radius: 0px 5px 5px 0px;
+}
+
+.items-dropdown {
+    position: static;
+    right: 0;
+}
+
+.term-input {
+    padding-right: 32px;
+}
+
+input.invalid {
+    border-color: #D70000;
+}
+
+.radios-wrapper {
+    background: #F7F6F6;
+}
+
+.position-general-drop {
+    position: absolute;
+    left: 0;
+}
+.position-dc-drop {
+    position: absolute;
+    right: 0;
+}
+.position-dc-wrapper {
+    min-height: 48px;
+}
+.relative {
+    position: relative;
+}

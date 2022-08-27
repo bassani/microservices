@@ -1,0 +1,43 @@
+<div [formGroup]="form">
+    
+    <div class="p-d-flex p-flex-column p-flex-md-row">
+        <div class="p-col-12">
+            <div>
+                <label id="classification-label-name" class="label p-ml-2">Nome</label>
+            </div>
+            <input id="classification-name-input" placeholder="Nome" name="name" class="name" type="text" formControlName="name" pInputText>
+        </div>
+    </div>
+
+    <div class="p-d-flex p-flex-column p-flex-md-row">
+        <div class="p-col-12">
+            <div>
+                <label id="classification-label-status" class="label p-ml-2">Ativo</label>
+            </div>
+            <p-dropdown id="classification-status-input" [options]="options" placeholder="Selecione" optionLabel="label"
+                optionValue="value"  formControlName="active">
+            </p-dropdown>
+        </div>
+    </div>
+
+    <div class="p-d-flex p-flex-column p-flex-md-row">
+        <div class="p-col-12">
+            <div>
+                <label id="classification-label-description" class="label p-ml-2">Descrição</label>
+            </div>
+            <textarea id="classification-description-input" name="description" class="description" formControlName="description"
+                pInputTextarea placeholder="Digite a descrição"></textarea>
+        </div>
+    </div>
+</div>
+
+<p-footer>
+    <div class="p-d-flex p-jc-end button-grid p-mr-3 area-button">
+
+        <button pButton pRipple type="button" (click)="closeModal()" label="Cancelar" icon="pi pi-times-circle"
+            class="btn p-button-rounded" id="edit-classification-dialog-close"></button>
+
+        <button pButton pRipple type="button" [disabled]="form.invalid" (click)="!!form.value.id ? saveClassification() : addClassification()" label="Salvar" icon="pi pi-save"
+            class="btn p-button-success" id="edit-classification-dialog-save"></button>
+    </div>
+</p-footer>

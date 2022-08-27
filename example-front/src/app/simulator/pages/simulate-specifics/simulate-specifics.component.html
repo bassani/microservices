@@ -1,0 +1,60 @@
+<div class="card-container">
+  <app-simulation-description *ngIf="simulation" [simulation]="simulation"
+    subtitle="Adicione os detalhes da simulação e clique em simular para calcular os valores.">
+
+  </app-simulation-description>
+
+  <p-card class="simulation-content" id="simulation-specifics-card" *ngIf="simulation">
+
+    <div remove-wrapper class="p-text simulation-antecipation">Simulação de {{simulation.simulationType.title}}</div>
+
+    <div class="p-grid p-mb-4" *ngIf="form" with-simulation-dynamic-field [form]="form"
+      [simulationType]="simulation.simulationType">
+
+
+      <!-- Aqui vai os componentes com serviço chamando dados do back-end em cada um deles-->
+      <app-payment-term-cd [dcs]="DCs" [formControl]="getControl('newPaymentTerm')" id="term-select" class="p-col-4">
+      </app-payment-term-cd>
+      <app-sales-calculation id="simulate-sales-calculation" class="p-col-12 p-lg-4 p-md-6 p-sm-6 p-xs-12"
+        [control]="getControl('calculationBasis')">
+      </app-sales-calculation>
+      <div id="antecipation-observations" class="p-col-12">
+        <label class="label">Observações *</label>
+        <textarea id="observation-input" placeholder="Digite uma observação" class="observation-input p-mt-1 full-width"
+          pInputTextarea [rows]="1" [cols]="30" [maxLength]="512" [autoResize]="false"
+          [formControl]="getControl('note')" name="observation" [required]="true"></textarea>
+        <div class="p-d-flex full-width p-jc-end">
+          <small id="observation-count-hint">{{form.get('note')?.value?.length || 0}}/512</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-grid p-col-12">
+      <!-- Botão para abrir modal de filtro de produtos -->
+      <div class="p-grid p-col-12 p-lg-4 p-md-6 p-sm-6 p-xs-12">
+        <app-detailing-dialog id="simulate-detailing-modal" [control]="getGroup('productFilter')">
+        </app-detailing-dialog>
+      </div>
+
+      <!-- Botão para abrir modal de descontos -->
+      <div class="p-grid p-col-12 p-lg-4 p-md-6 p-sm-6 p-xs-12">
+        <app-discount-modal id="simulate-discount-modal" [simulation]="simulation" [control]="getGroup('discount')"></app-discount-modal>
+      </div>
+
+      <!-- Botão para abrir modal de verbas -->
+      <div class="p-grid p-col-12 p-lg-4 p-md-6 p-sm-6 p-xs-12">
+        <app-budget-dialog [control]="getGroup('budget')"></app-budget-dialog>
+      </div>
+
+    </div>
+
+    <div class="p-d-flex p-jc-end button-grid p-mr-3">
+      <button pButton pRipple type="button" label="Limpar Campos" class="btn p-button-rounded  p-button-white" id="simulate-cleanbutton"
+        (click)="form.reset()"></button>
+      <button pButton pRipple type="button" label="Simular" class="btn p-button-success" id="simulate-button"
+        (click)="simulate()"></button>
+    </div>
+
+  </p-card>
+
+</div>

@@ -1,0 +1,8 @@
+<label class="label">Tipos de produtos</label>
+<p-multiSelect  [options]="options" optionLabel="name" id="product-types-input" placeholder="Selecione" [filter]="true" [formControl]="control">
+  <ng-template let-option pTemplate="item">
+    <div class="option-item" id="product-type-select-option">
+        <div>{{option.name}}</div>
+    </div>
+</ng-template>
+</p-multiSelect>

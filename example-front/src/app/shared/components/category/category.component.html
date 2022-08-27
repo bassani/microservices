@@ -1,0 +1,28 @@
+<div class="p-d-flex p-flex-column p-flex-md-row">
+  <div class="simulation-content p-col-6" [ngClass]="{'p-col-12 paddingless': !showSubcategory}">
+    <div>
+      <label class="label p-ml-2">Categoria</label>
+    </div>
+
+    <p-multiSelect [options]="(category$ | async)?.content || []" placeholder="Selecione as categorias..." [maxSelectedLabels]="1"
+    filterBy="name,id" class="full-width" optionLabel="name" (onChange)="getSubcategories($event)" [selectedItemsLabel]="'{0} categorias selecionadas'"
+      id="category-dropdown" [filter]=true [formControl]="categoryControl" [virtualScroll]="true" [itemSize]="20">
+    </p-multiSelect>
+    <div class="small-card" *ngIf="manufacturersSelected.length > 0">
+      <small id="category-dropdown-hint">Mostrando somente categorias disponíveis para os fabricantes
+        {{manufacturersSelected}}. <strong (click)="clearManufacturers()" id="category-dropdown-hint-clear-action"
+          class="small-manufacturer">Limpar fabricantes</strong></small>
+    </div>
+  </div>
+
+  <div class="simulation-content p-jc-sm-center p-col-6" *ngIf="showSubcategory">
+    <div>
+      <label class="label p-ml-2">Subcategoria</label>
+    </div>
+    <p-multiSelect [options]="(subcategory$ | async)?.content || []" placeholder="Selecione as subcategorias..." [maxSelectedLabels]="1"
+    filterBy="name,id" class="full-width" optionLabel="name" [selectedItemsLabel]="'{0} subcategorias selecionadas'"
+      id="subcategory-dropdown" [filter]=true [formControl]="subcategoryControl">
+    </p-multiSelect>
+  </div>
+
+</div>

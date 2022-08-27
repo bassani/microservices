@@ -1,0 +1,21 @@
+<ng-container [ngSwitch]="simulationType.key">
+
+    <div id="simulate-date-calendar" *ngSwitchCase="'valor'" class="p-col-12 p-lg-4 p-md-6 p-sm-6 p-xs-12">
+        <label class="label">Valor da compra (R$) *</label>
+        <p-inputNumber *ngIf="form" id="simulation-amount-input" mode="currency" currency="BRL" locale="pt-BR" [min]="1" placeholder="R$ 0,00" class="full-width" [formControl]="getControl('amount')"></p-inputNumber>
+    </div>
+
+    <div id="simulate-date-calendar" *ngSwitchCase="'cobertura'" class="p-col-12 p-lg-4 p-md-6 p-sm-6 p-xs-12">
+        <label class="label">Cobertura Estoque CD</label>
+        <p-inputNumber id="simulation-coverage-input" placeholder="Insira a quantidade de dias..." [min]="1" [max]="800" [formControl]="getControl('stockCoverageDC')"></p-inputNumber>
+    </div>
+
+    <div id="simulate-date-calendar" *ngSwitchCase="'antecipacao'" class="p-col-12 p-lg-4 p-md-6 p-sm-6 p-xs-12">
+        <label class="label">Data *</label>
+        <p-calendar placeholder="Selecione a data" id="date-calendar" class="full-width" [minDate]="minDateValue"
+        dateFormat="dd/mm/yy" name="dateCalendar" [formControl]="getControl('anticipationDate')" [showIcon]="true" icon="pi pi-calendar" [required]="true"></p-calendar>
+    </div>
+    
+    <div *ngSwitchCaseDefault></div>
+  </ng-container>
+<ng-content></ng-content>

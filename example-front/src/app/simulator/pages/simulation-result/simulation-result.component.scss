@@ -1,0 +1,54 @@
+.subheader {
+  font-size: 18px;
+  font-weight: bold;
+  color: #707070;
+}
+
+.resume-row {
+  font-size: 14px;
+  color: #707070;
+  font-weight: 500;
+  line-height: 18, 75px;
+}
+
+
+.resume-row-value {
+  color: black;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.details-header {
+  font-size: 18px;
+}
+
+:host::ng-deep.set-height-card > .p-card {
+  height: 95%;
+}
+
+:host::ng-deep.ajusted-card > .p-card {
+  margin: auto;
+}
+
+:host::ng-deep.overflowable-card > .p-card {
+  overflow-x: scroll;
+  max-width: calc(100vw - 250px);
+}
+
+:host::ng-model.full-width {
+  width: 100%;
+}
+.paddingless {
+  padding: 0px;
+}
+
+.rd-small {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  display: flex;
+  align-items: center;
+  color: #4f4f4f;
+  margin-bottom: -30px;
+}

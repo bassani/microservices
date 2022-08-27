@@ -1,0 +1,108 @@
+{
+  "distribuctionCenters": {
+    "content": [
+	    { "id": 1, "name": "Remédios" },
+	    { "id": 2, "name": "Produtos de Higiene" },
+	    { "id": 3, "name": "Produtos para Bebes" },
+	    { "id": 4, "name": "Cosméticos" },
+	    { "id": 5, "name": "Suplementos" }
+	  ],
+	  "page": 0,
+	  "size": 0,
+	  "numberOfElements": 0
+	},
+  "orderTypes": {
+    "content": [
+	    { "id": 1, "name": "Pedido do fornecedor" },
+	    { "id": 2, "name": "Pedido do fabricante" },
+	    { "id": 3, "name": "Produtos adiantados" },
+	    { "id": 4, "name": "Outros" }
+	  ],
+	  "page": 0,
+	  "size": 0,
+	  "numberOfElements": 0
+	},
+  "simulationClassification": {
+    "content": [
+	    { "id": 1, "name": "Simulação" },
+	    { "id": 2, "name": "Classificação" },
+	    { "id": 3, "name": "Entregues" },
+	    { "id": 4, "name": "Separados" }
+	  ],
+	  "page": 0,
+	  "size": 0,
+	  "numberOfElements": 0
+	},
+  "manufacturer": {
+    "content": [
+	    { "id": 1, "name": "Johnson Johnson" },
+	    { "id": 2, "name": "Hypermarcas" },
+	    { "id": 3, "name": "Novartis" },
+	    { "id": 4, "name": "Eurofarma" },
+      { "id": 5, "name": "Takeda" }
+	  ],
+	  "page": 0,
+	  "size": 0,
+	  "numberOfElements": 0
+	},
+  "category": {
+    "content": [
+	    { "id": 1, "name": "A" },
+	    { "id": 2, "name": "B" },
+	    { "id": 3, "name": "C" },
+	    { "id": 4, "name": "D" },
+      { "id": 5, "name": "E" }
+	  ],
+	  "page": 0,
+	  "size": 0,
+	  "numberOfElements": 0
+	},
+  "subcategory": {
+    "content": [
+	    { "id": 1, "name": "A1", "category":1 },
+	    { "id": 2, "name": "B1", "category":2 },
+	    { "id": 3, "name": "C3", "category":3 },
+	    { "id": 4, "name": "D1", "category":4 },
+      { "id": 5, "name": "D1", "category":5 }
+	  ],
+	  "page": 0,
+	  "size": 0,
+	  "numberOfElements": 0
+	},
+  "paymentTerm": {
+    "content": [
+	    { "id": 1, "name": "Pagamento 1" },
+	    { "id": 2, "name": "Pagamento 2" },
+	    { "id": 3, "name": "Pagamento 3" },
+	    { "id": 4, "name": "Pagamento 4" },
+      { "id": 5, "name": "Pagamento 5" }
+	  ],
+	  "page": 0,
+	  "size": 0,
+	  "numberOfElements": 0
+	},
+  "salesCalculation": {
+    "content": [
+	    { "id": 1, "name": "Vendas para cálculo 1" },
+	    { "id": 2, "name": "Vendas para cálculo 2" },
+	    { "id": 3, "name": "Vendas para cálculo 3" },
+	    { "id": 4, "name": "Vendas para cálculo 4" },
+      { "id": 5, "name": "Vendas para cálculo 5" }
+	  ],
+	  "page": 0,
+	  "size": 0,
+	  "numberOfElements": 0
+	},
+  "typeProducts": {
+    "content": [
+	    { "id": 1, "name": "Somente inativos" },
+	    { "id": 2, "name": "Desconsiderar Promopacks" },
+	    { "id": 3, "name": "Somente Promopacks" },
+	    { "id": 4, "name": "Desconsiderar Cotados" },
+      { "id": 5, "name": "Somente Cotados" }
+	  ],
+	  "page": 0,
+	  "size": 0,
+	  "numberOfElements": 0
+	}
+}

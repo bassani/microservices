@@ -1,0 +1,21 @@
+.p-checkbox:focus {
+    box-shadow: 0px 0px 4px var(--green-300);
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box {
+    &:hover {
+        border-color: var(--primary-color)
+    }    
+}
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+    background-color: var(--green-800);
+}
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
+    box-shadow: 0px 0px 4px var(--green-300);
+    border-color: var(--primary-color);
+}
+.p-checkbox .p-checkbox-box.p-highlight {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+ 
+}

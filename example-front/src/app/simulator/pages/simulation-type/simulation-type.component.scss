@@ -1,0 +1,18 @@
+.spaced {
+    margin: 32px 0px;
+}
+.spaced > input {
+    margin-top: 4px;
+}
+.spaced > .label {
+    margin-left: 8px;
+}
+.right-marg {
+    margin-right: 32px;
+}
+:host::ng-deep.double-border .p-divider.p-divider-horizontal:before {
+    border-width: 2px;
+}
+.m-b-14 {
+    margin-bottom: 14px !important;
+}

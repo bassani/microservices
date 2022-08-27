@@ -1,0 +1,95 @@
+/**
+Insert any classification crud page css styles here
+
+*/
+
+.table-wrapper {
+  padding: 12px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 24px;
+}
+.spinner-wrapper {
+  min-height: 300px;
+  width: 100%;
+}
+.full-width {
+  width: 100%;
+}
+.max-descrition {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 20%;
+  max-width: 300px;
+}
+
+.name{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 20%;
+}
+
+:host::ng-deep.p-icon-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+:host::ng-deep.p-icon-button {
+  border-radius: 50% !important;
+  color: var(--green-600);
+  background: white;
+  border: none;
+  box-shadow: 0px 0px 6px -3px black;
+}
+
+:host::ng-deep.p-icon-button:hover {
+  border-radius: 50% !important;
+  color: var(--green-600);
+  background: #f4f4f4;
+  border: none;
+}
+
+.buttons{
+  margin-top: 28px;
+  margin-left: 12px;
+}
+
+.th-grid {
+  font-size: 12px;
+}
+
+.td-grid {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #000000;
+  a{
+    color: #00a67e;
+  }
+}
+
+.chip {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  border-radius: 4px;
+  border: none !important;
+  min-width: 60px;
+  height: 20px;
+}
+
+.active{
+  color: #355F2F;
+  background-color: #CEE5CB;
+}
+
+.inactive{
+  background-color: #fbedc0;
+  color: #c8992b;
+}

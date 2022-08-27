@@ -1,0 +1,6 @@
+.healer-module:
+  variables:
+    MODULE: "example-core"
+  only:
+    changes:
+    - "example-core/**/*"

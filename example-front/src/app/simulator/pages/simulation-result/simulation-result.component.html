@@ -1,0 +1,165 @@
+<div class="card-container">
+  <p-confirmDialog [style]="{width: '30vw'}" [baseZIndex]="10000"></p-confirmDialog>
+  
+  <div class="p-text p-mb-3 p-mt-5 simulation-title" *ngIf="simulation && !hasError">
+    <strong id="simulate-title">Simulação #{{simulation?.id}} - {{simulation?.registerDate?.split(' ')[0].split('-').reverse().join('/')}}</strong>
+  </div>
+  <div class="p-text p-d-flex p-flex-column p-mb-5" *ngIf="simulation && !hasError">
+    <small class="small-title">Confira o resultado da simulação e clique em <strong>seguir</strong> para o
+      template</small>
+  </div>
+
+  <div class="p-text p-d-flex full-width p-jc-between p-flex-wrap p-mb-1 p-col-11" *ngIf="simulation && !hasError">
+    <p-messages [(value)]="msgs" class="p-col-11"></p-messages>
+  </div>
+
+  <div class="p-d-flex full-width p-jc-between p-flex-wrap">
+    <p-card *ngIf="!simulation && !hasError" class="full-width">
+      <simulating></simulating>
+    </p-card>
+
+    <p-card class="full-width" *ngIf="hasError">
+      <div class="p-d-flex p-ai-center">
+        <p-button (click)="back()" icon="pi pi-arrow-left" class="p-button-text p-button-white rounded"></p-button>
+        <h3 class="p-ml-3">Oops!</h3>
+      </div>
+      <div class="p-col-12">
+        <span *ngIf="simulation?.id">
+          Ocorreu algum erro durante o processamento da sua simulação, clique no botão de voltar para criar outra simulação. 
+          <br>
+          Caso esse erro persista contate o suporte.
+        </span>
+        <span *ngIf="!simulation?.id">
+          Não encontramos nenhuma simulação com o id informado.
+        </span>
+
+      </div>
+      <div class="p-m-3 full-width">
+        <img class="full-width p-mt-3 loader-img" height="500px" src="/assets/imgs/undraw/undraw_warning.svg"/>
+      </div>
+
+      <div class="p-d-flex full-width p-jc-center p-m-3 p-mt-5">
+        <p-button class="btn p-button-success" label="Voltar" (click)="back()"></p-button>
+        <!--<p-button *ngIf="simulation?.id" class="btn p-button-success" label="Tentar novamente" (click)="retry()"></p-button>-->
+      </div>
+
+    </p-card>
+  </div>
+
+
+  <div *ngIf="!!simulation && !!simulation?.id && !!simulation?.orderType?.name && !hasError"  class="p-d-flex full-width p-jc-between p-flex-wrap">
+    <p-card id="simulation-resume" class="p-col-4 p-lg-4 p-md-10 p-sm-12 set-height-card">
+      <div class="p-text simulation-antecipation subheader p-ml-2 p-mb-3">Resumo</div>
+      <div class="p-col-12 resume-row">Simulado em: <span class="resume-row-value">{{getDate(simulation)}}</span></div>
+      <div class="p-col-12 resume-row">Tipo da simulação: <span
+          class="resume-row-value">{{simulation.simulationType?.title}}</span></div>
+      <div class="p-col-12 resume-row">CDs: <span class="resume-row-value">{{cdList}}</span></div>
+      <div class="p-col-12 resume-row">Fornecedor Pai: <span class="resume-row-value">{{getParentSuppliers(simulation?.suppliers)}}</span></div>
+      <div class="p-col-12 resume-row">Fabricante: <span class="resume-row-value">{{asList(simulation.suppliers, 'o')}}</span></div>
+      <div class="p-col-12 resume-row">Tipo de pedido: <span
+          class="resume-row-value">{{simulation?.orderType?.name || simulation?.orderType?.id}}</span></div>
+      <div class="p-col-12 resume-row">Classificação: <span
+          class="resume-row-value">{{simulation?.classification?.name}}</span></div>
+      <div class="p-col-12 resume-row">Categorias: <span class="resume-row-value">{{asList(simulation?.categories)}}</span>
+      </div>
+      <div class="p-col-12 resume-row">Subcategorias: <span
+          class="resume-row-value">{{asLimitedList(simulation?.subcategories, 'Subcategorias')}}</span></div>
+    </p-card>
+
+    <p-card id="simulation-resume" class="p-col-8 p-lg-8 p-md-12 p-sm-12 set-height-card">
+      <div class="p-text simulation-antecipation subheader p-ml-3 p-mb-3">Simulação {{simulation?.simulationType?.name}}
+      </div>
+
+      <div class="full-width p-d-flex p-jc-between">
+        <div class="p-col-5" with-simulation-type-results [simulation]="simulation">
+          <div class="p-col-12 resume-row">Desconto: <span class="resume-row-value">{{(discount | async) || 'Parâmetro Regular'}}</span></div>
+          <div class="p-col-12 resume-row">Base para cálculo: <span class="resume-row-value">{{(getCalculationBasis(simulation.calculationBasis)) || 'Não informado'}}</span>
+          </div>
+          <div class="p-col-12 resume-row">Observação: <span class="resume-row-value">{{simulation?.note}}</span>
+          </div>
+          <div class="p-col-12 resume-row">Prazo regular * : <span
+              class="resume-row-value">{{simulation?.regularTermInDaysQuantity}}</span></div>
+          <div class="p-col-12 resume-row">Novo prazo * : <span class="resume-row-value">{{simulation?.newTermInDaysQuantity || 'Não informado'}}</span>
+          </div>
+          <div class="p-col-12 resume-row">Delta prazo : <span class="resume-row-value">{{simulation?.deltaTermInDaysQuantity}}</span>
+          </div>
+          <div class="p-col-12 resume-row">Lead Time - TE * : <span
+              class="resume-row-value">{{simulation?.leadTime}}</span></div>
+          <div class="p-col-12 resume-row">Frequência Compra - TF * : <span
+              class="resume-row-value">{{simulation?.frequencyTime}}</span></div>
+
+          <div class="p-col-12 resume-row p-jc-start p-d-flex p-mt-4" style="font-size: 18px;">Valor Compra (R$)</div>
+          <div class="p-col-12 resume-row p-jc-start p-ai-center p-d-flex">Regular: <span
+              class="resume-row-value p-ml-1">{{simulation?.totalAmountWithRegularDiscount | currency: 'BRL'}}</span></div>
+          <div class="p-col-12 resume-row p-jc-start p-ai-center p-d-flex">Negociado: <span
+              class="resume-row-value p-ml-1">{{simulation?.totalAmountWithNegotiatedDiscount | currency: 'BRL'}}</span></div>
+          <div class="p-col-12 resume-row p-jc-start p-ai-center p-d-flex">Ganho (R$): <span
+              class="resume-row-value  p-ml-1">{{simulation?.gain | currency: 'BRL'}}</span></div>
+          <div class="p-col-12 resume-row p-jc-start p-ai-center p-d-flex">Ganho (%): <span
+            class="resume-row-value  p-ml-1">{{simulation?.percentageGain | percent: '1.2-2'}}</span></div>
+        </div>
+
+        <p-divider layout="vertical"></p-divider>
+        <div class="p-col-5">
+          <div class="p-col-12 p-py-1 resume-row p-jc-end p-ai-center p-d-flex">Total de unidades: <span
+            class="resume-row-value p-ml-1">{{simulation?.orderedQty}}</span></div>
+
+          <div class="p-col-12 resume-row p-jc-end p-ai-center p-d-flex p-mt-4" style="font-size: 18px;">Verba</div>
+          <div class="p-col-12 resume-row p-jc-end p-ai-center p-d-flex" *ngIf="!simulation.budgetType">Nenhuma verba aplicada</div>
+          <div class="p-col-12 resume-row p-jc-end p-ai-center p-d-flex" *ngIf="!!simulation.budgetType">Tipo de verba: <span
+            class="resume-row-value  p-ml-1">{{simulation?.budgetType ? (simulation.budgetType === 1 ? 'Reais' : 'Porcentagem') : ''}}</span></div>
+            <div class="p-col-12 resume-row p-jc-end p-ai-center p-d-flex" *ngIf="simulation?.budgetType && simulation.budgetType === 2">Valor da verba: <span
+              class="resume-row-value  p-ml-1">{{simulation?.informedBudgetValue}}%</span></div>
+          <div class="p-col-12 resume-row p-jc-end p-ai-center p-d-flex" *ngIf="simulation.totalBudgetValue !== null && simulation.totalBudgetValue !== undefined">Total da verba: <span
+            class="resume-row-value  p-ml-1">{{simulation?.totalBudgetValue | currency: 'BRL'}}</span></div>
+          <div class="p-col-12 resume-row p-jc-end p-ai-start p-d-flex" *ngIf="!!simulation.budgetReason"> <span
+            class="resume-row-value  p-ml-1" style="max-width: 60%; text-align: right;" ><span class="resume-row p-mr-1">Motivo:</span>{{simulation?.budgetReason}}</span></div>
+
+          <div class="p-col-12 resume-row p-jc-end p-ai-center p-d-flex p-mt-4" style="font-size: 18px;">Cobertura Estoque</div>
+          <div class="p-col-12 resume-row p-jc-end p-d-flex">
+            Atual - CD * : <span class="resume-row-value  p-ml-1">{{simulation?.dailyCDStock}}</span>
+          </div>
+          <div class="p-col-12 resume-row p-jc-end p-d-flex">
+            Após compra - CD * : <span class="resume-row-value  p-ml-1">{{simulation?.dailyFinalStock}}</span>
+          </div>
+          <div class="p-col-12 resume-row p-jc-end p-d-flex">
+            Rede - CD/Loja * : <span class="resume-row-value p-ml-1">{{simulation?.dailyGridStock}}</span>
+          </div>
+          <div class="p-col-12 resume-row p-jc-end p-d-flex">
+            DDE Compra : <span class="resume-row-value p-ml-1">{{simulation?.stockDaysPurchase || 0}}</span>
+          </div>
+          <div class="p-col-12 p-jc-end resume-row">
+            <small class="rd-small p-jc-end p-my-3">* Dados considerando a média de dias</small>
+          </div>
+        </div>
+      </div>
+
+    </p-card>
+  </div>
+
+  <div class="full-width p-d-flex" *ngIf="!!simulation && !hasError" >
+    <p-card class="p-col-12 full-width paddingless full-width ajusted-card overflowable-card">
+      <p-tabView class="borderless-tabview" [(activeIndex)]="currentTab">
+        <p-tabPanel [disabled]="true">
+          <ng-template pTemplate="header"><span class="details-header">Detalhamento por: </span></ng-template>
+        </p-tabPanel>
+
+        <p-tabPanel header="CD">
+          <app-simulation-result-cd [simulationByCd]="simulationByCd"></app-simulation-result-cd>
+        </p-tabPanel>
+
+        <p-tabPanel header="Produto">
+          <app-simulate-export [simulationId]="simulation.simulationId"></app-simulate-export>
+        </p-tabPanel>
+      </p-tabView>
+    </p-card>
+
+  </div>
+
+  <div class="full-width p-p-4 p-d-flex p-jc-end" *ngIf="!!simulation && !hasError" >
+    <p-button class="p-button-success rounded p-button-white p-mr-1" (click)="back()" label="Voltar"></p-button>
+    <p-button withRoles  class="p-button-success rounded p-ml-1" [roles]="['create_simulation']" (click)="finishSimulation()" label="Seguir para template">
+    </p-button>
+  </div>
+
+</div>

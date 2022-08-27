@@ -1,0 +1,18 @@
+<div>
+  <label class="label" id="supplier-label">ID simulação</label>
+  <p-dropdown class="full-width" id="idSimulation-select"
+  [formControl]="control"
+  [options]="idSimulation"
+  placeholder="Selecione o ID"
+  emptyFilterMessage="Nenhum ID encontrado"
+  emptyMessage="Nenhum ID encontrado"
+  [showClear]="true"
+  optionLabel="id">
+    <ng-template let-option pTemplate="item">
+      <div class="option-item" id="idSimulation-option">
+        <div>{{option.id}}</div>
+      </div>
+    </ng-template>
+  </p-dropdown>
+</div>
+

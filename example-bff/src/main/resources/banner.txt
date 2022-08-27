@@ -1,0 +1,9 @@
+ ____  _____ _____
+ | __ )|  ___|  ___|
+ |  _ \| |_  | |_
+ | |_) |  _| |  _|
+ |____/|_|   |_|
+${AnsiColor.RED} :: Spring Boot${spring-boot.formatted-version} :: ${AnsiColor.RED}
+${AnsiColor.GREEN} :: ${info.app.name} (${info.app.version}) :: ${AnsiColor.GREEN}
+${AnsiColor.BLUE} :: example-model-lib (${purchase.simulator.model.lib.version}) :: ${AnsiColor.BLUE}
+${AnsiColor.DEFAULT}

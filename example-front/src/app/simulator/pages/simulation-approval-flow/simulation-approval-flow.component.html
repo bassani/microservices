@@ -1,0 +1,110 @@
+<div class="card-container">
+
+  <div class="p-text p-mb-3 simulation-title">
+    <strong>Template - Simulação #{{this.simulationID}}</strong>
+  </div>
+  <div class="p-text p-mb-6">
+    <small class="small-title">Confira o resumo do pedido e as informações do fornecedor pai.</small>
+  </div>
+
+  <div class="p-d-flex">
+
+    <p-card class="p-col-7 p-d-flex p-py-2 graph-card">
+      <div class="p-text-center simulation-data p-mb-3">Cobertura de Estoque</div>
+      <div *ngIf="resultChart" class="card">
+        <p-chart type="bar" height="230px" [data]="basicData" [options]="basicOptions"></p-chart>
+      </div>
+    </p-card>
+
+    <div class="p-col-5 p-pr-5">
+
+      <p-card class="compact-card card-resalted" id="amount-card">
+        <div class="p-d-flex p-flex-wrap">
+          <span class="full-width label-item">Valor</span>
+          <span class="big-text full-width">{{result.purchaseValue  | currency: 'BRL'}}</span>
+        </div>
+      </p-card>
+
+      <p-card class="compact-card card-resalted success">
+        <div class="p-d-flex p-flex-wrap" id="gain-card">
+          <span class="full-width label-item">Ganho</span>
+          <span class="big-text full-width">{{result.gain | currency: 'BRL'}}</span>
+        </div>
+      </p-card>
+
+      <p-card class="compact-card card-resalted success" id="budget-card">
+        <div class="p-d-flex p-flex-wrap">
+          <span class="full-width label-item">Verba</span>
+          <span class="big-text full-width">{{result.totalBudgetValue | currency: 'BRL'}}</span>
+        </div>
+      </p-card>
+
+      <p-card class="compact-card card-resalted error" id="cashflow-impact-card">
+        <div class="p-d-flex p-flex-wrap">
+          <span class="full-width label-item">Impacto no ciclo de caixa</span>
+          <span class="big-text full-width">{{result.cashFlowImpact | currency: 'BRL'}}</span>
+        </div>
+      </p-card>
+
+      <p-card class="compact-card card-resalted" id="motive-card">
+        <div class="p-d-flex p-flex-wrap">
+          <span class="full-width label-item">Classificação do pedido</span>
+          <span class="big-text full-width">{{result.orderClassification}}</span>
+        </div>
+      </p-card>
+    </div>
+  </div>
+
+  <div class="p-col-12 paddingless-t">
+    <p-card class="full-width">
+      <p-tabView class="borderless-tabview big-header">
+        <p-tabPanel header="Resumo de Pedido">
+           <simulation-resume-tab></simulation-resume-tab>
+        </p-tabPanel>
+        <p-tabPanel header="Indicador - Financeiro / Perdas">
+            <simulation-indicators-tab></simulation-indicators-tab>
+        </p-tabPanel>
+    </p-tabView>
+    </p-card>
+  </div>
+
+  <div *ngIf="resultStatus.length > 0">
+    <div *ngIf="approver" class="p-col-12 p-d-flex p-jc-end p-mb-5">
+      <button pButton [disabled]="disableCompleteButtons" class="p-button p-button-danger button-radius p-mr-2" (click)="refuse()" label="Recusar"></button>
+      <button pButton [disabled]="disableCompleteButtons" class="button-success button-radius beefup p-mr-5" (click)="approve()" label="Aprovar"></button>
+    </div>
+
+    <div *ngIf="!approver && resultStatusPendente" class="p-col-12 p-d-flex p-jc-end p-mb-5">
+      <p-button class="button-success rounded beefup p-button-white p-mr-2" (click)="toResume()" label="Visualizar Resumo"></p-button>
+      <p-button class="button-success rounded beefup p-mr-5" (click)="startApprovalProcess()" label="Enviar para aprovação"></p-button>
+    </div>
+  </div>
+
+
+  <p-dialog class="modal-status" id="reasonRefuse" [modal]="true" header="Porque você deseja recusar?" [(visible)]="displayReason" [style]="{width: '500px'}">
+    <div [formGroup]="reasonForm">
+      <textarea pInputTextarea rows="6" formControlName="reasonRefuse" placeholder="Digite o motivo" [style]="{width: '100%'}"></textarea>
+    </div>
+    <ng-template pTemplate="footer">
+      <div class="p-d-flex p-jc-end button-grid">
+        <button pButton c [disabled]="reasonForm.invalid" class="p-button p-button-danger button-radius" (click)="completeStatus('reprovado')" [label]="loading ? ' ' : 'Recusar'">
+          <p-progressSpinner [strokeWidth]="'8'" class="p-mx-3 p-d-flex p-ai-center p-jc-center small-spinner" *ngIf="loading"></p-progressSpinner>
+        </button>
+      </div>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog class="modal-status" id="approve" [modal]="true" header="Aprovação" [(visible)]="displayApprove" [style]="{width: '500px'}">
+    <div>
+      <p-checkbox (onChange)="toggleSelection($event)" [formControl]="getControl('checkedApprove')" ngDefaultControl name="approveForm" [binary]="true" label="Concordo com todas as informações apresentadas no template"></p-checkbox>
+    </div>
+    <ng-template pTemplate="footer">
+      <div class="p-d-flex p-jc-end button-grid">
+        <button pButton type="submit" [disabled]="!checkedApprove" class="button-success button-radius beefup" (click)="completeStatus('aprovado')" [label]="loading ? ' ' : 'Aprovar'">
+          <p-progressSpinner [strokeWidth]="'8'" class="p-mx-3 p-d-flex p-ai-center p-jc-center small-spinner" *ngIf="loading"></p-progressSpinner>
+        </button>
+      </div>
+    </ng-template>
+  </p-dialog>
+
+</div>

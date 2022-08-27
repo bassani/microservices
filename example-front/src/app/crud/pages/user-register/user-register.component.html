@@ -1,0 +1,82 @@
+<div class="card-container">
+  <div class="p-text p-ml-5 p-mt-5 title" id="page-title">Cadastro de usuários</div>
+  <div class="p-text p-mb-5 p-ml-5 p-mt-3 subtitle" id="page-plain-subtitle">Utilize os filtros para buscar os usuários.</div>
+  <div>
+    <p-card>
+        <div class="p-d-flex p-jc-between p-align-center p-flex-wrap">
+            <div class="p-col-8 paddingless p-d-flex p-flex-column spaced">
+                <label class="label">Pesquisar</label>
+                <input [formControl]="searchControl" id="search-type-input" type="text" placeholder="Digite o texto para pesquisar"
+                pInputText />
+            </div> 
+            <div class="buttons">
+                <button (click)="clearSearch()" pButton pRipple type="button" label="Limpar Campos" class="btn p-button-rounded p-button-white" id="track-clean-button"></button>
+                <button (click)="filter()" pButton pRipple type="submit" label="Buscar" name="Buscar" class="p-button-success p-button-rounded p-ml-2" id="search-button" role="button"></button>          
+            </div>
+        </div>
+    </p-card>
+  </div>
+  <div>
+    <p-card class="p-m-5"  id="rd-card-results">
+        <ng-template pTemplate="header">
+            <div class="p-d-flex p-jc-between p-align-center p-flex-wrap">
+                <h3 class="p-ml-5 p-mt-5">Usuários cadastrados</h3>
+                <div>
+                    <button pButton icon="pi pi-plus" pRipple
+                        class="btn p-button-rounded p-button-success p-mt-3 p-mb-3 p-mr-5" label="Novo cadastro"
+                        id="add-user-btn" (click)="editOrAddUser(null)"></button>
+
+                </div>
+            </div>
+
+        </ng-template>
+        <div class="p-d-flex p-jc-center p-flex-column p-flex-wrap " *ngVar="(users$ | async) as state">
+            <div class="p-grid p-align-center full-width table-wrapper p-d-flex" >
+                <div class="spinner-wrapper p-d-flex p-align-center p-jc-center"  *ngIf="state.status == 'LOADING'">
+                    <p-progressSpinner id="user-list-spinner"></p-progressSpinner>
+                </div>
+                <table aria-describedby="lista de usuários" class="full-width" id="user-table" *ngIf="state.status == 'READY'">
+                    <thead id="user-table-head">
+                        <tr>
+                            <th class="th-grid text-left" id="table-head-name">Nome</th>
+                            <th class="th-grid text-left" id="table-head-registrationNumber">Matricula</th>
+                            <th class="th-grid text-left" id="table-head-email">E-mail</th>
+                            <th class="th-grid text-left" id="table-head-groupName">Área</th>
+                            <th class="th-grid text-left" id="table-head-phoneNumber">Telefone</th>
+                            <th class="th-grid text-left" id="table-head-accessProfile">Perfil de Acesso</th>
+                            <th class="th-grid text-left" id="table-head-activationStatus">Status</th>
+                            <th class="th-grid text-end" id="table-head-actions">Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table-body">
+                        <tr [id]="'user-table-item-' + user.id" *ngFor="let user of state?.content">
+                            <td class="td-grid" id="user-table-item-name" class="td-grid">{{user.firstName ? user.firstName : '-' }}</td>
+                            <td class="td-grid" id="user-table-item-registrationNumber">{{user.registrationNumber ? user.registrationNumber : '-'}}</td>
+                            <td class="td-grid" id="user-table-item-email">{{user.email ? user.email : '-'}}</td>
+                            <td class="td-grid" id="user-table-item-groupName" >{{areaMap.get(user.areaCode)}}</td>
+                            <td class="td-grid" id="user-table-item-phoneNumber" >{{user.phoneNumber ? user.phoneNumber : '-' }}</td>
+                            <td class="td-grid" id="user-table-item-accessProfile">{{acessProfileMap.get(user.accessProfile)}}</td>
+                            
+                            <td id="user-table-item-activationStatus" class="td-grid">
+                                <button *ngIf="user.activationStatus"  pRipple type="button" disabled class="btn chip active" id="activationStatus-button">Ativo</button>
+                                <button *ngIf="!user.activationStatus" pRipple type="button" disabled class="btn chip inactive" id="activationStatus-button">Inativo</button>
+                            </td>
+                            <td class="td-grid" id="user-table-item-actions" class="text-end">
+                                <button pButton id="edit-user-btn"  class="p-icon-button p-button-white" (click)="editOrAddUser(user)" icon="pi pi-pencil" ></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="p-d-flex full-width p-jc-center" *ngVar="(users$ | async) as state">
+                <p-paginator id="track-paginator" [first]="page * state.size" [rows]="state.size" [totalRecords]="state.totalElements"
+                [rowsPerPageOptions]="[10,15,20]"
+                [showCurrentPageReport]="true"
+                (onPageChange)="paginate($event)"
+                currentPageReportTemplate="pág. {currentPage} de {totalPages}"
+                [showJumpToPageDropdown]="false" [showPageLinks]="false"></p-paginator>
+              </div>
+        </div>
+    </p-card>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<label class="label">Status</label>
+<p-dropdown id="status-input" placeholder="Selecione o status..." class="full-width"
+  filterBy="name,id" optionLabel="name" [formControl]="control"
+  [options]="(status$ | async) || []">
+  <ng-template let-option pTemplate="item">
+    <div class="option-item" id="status-option">
+      <div>{{option.id}} - {{option.name}}</div>
+    </div>
+  </ng-template>
+</p-dropdown>

@@ -1,0 +1,142 @@
+.simulation-title {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: #000000;
+  margin-left: 32px;
+  margin-top: 48px;
+}
+
+.small-title {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #000000;
+  margin-left: 32px;
+}
+
+.small-manufacturer {
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+:host::ng-deep.p-card {
+  margin-left: 30px;
+  background: #ffffff;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+:host::ng-deep.simulation-content {
+  & .p-card-body {
+    padding: 32px;
+  }
+  & .p-card-content {
+    padding: 0px;
+  }
+}
+
+.simulation-antecipation {
+  margin-bottom: 32px;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+}
+
+.btn {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+}
+
+.p-button-rounded {
+  color: #000000;
+  background: #ffffff;
+  box-shadow: 0px 0px 6px -2px rgba(0, 0, 0, 0.25);
+  border-radius: 24px;
+  border: none;
+}
+
+.p-button-rounded:hover {
+  color: #000000;
+  background: #ffffff;
+  box-shadow: 0px 0px 6px -1px rgba(0, 0, 0, 0.25);
+  border-radius: 24px;
+  border-color: rgb(202, 202, 202);
+}
+
+.p-button-success {
+  color: #ffffff;
+  background: var(--primary-color);
+  box-shadow: 0px 0px 6px -1px rgba(0, 0, 0, 0.25);
+  border-radius: 24px;
+  border-color: #008a5a;
+  height: 41px;
+  width: 181.46835327148438px;
+  left: 21.265869140625px;
+  top: 0px;
+}
+
+.button-grid {
+  margin-top: 32px;
+  grid-column-gap: 24px;
+}
+
+.input-text {
+  width: 100%;
+}
+
+.information {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0em;
+}
+
+:host::ng-deep.p-multiselect {
+  width: 100%;
+  margin-top: 4px;
+  background: #ffffff;
+  border: 1px solid #b3b3b3;
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+
+
+
+
+.observation-input {
+  border-radius: 8px;
+  padding: 6px 8px;
+  min-height: 37px;
+  width: 100%;
+  border-color: #b3b3b3;
+}
+
+.pi-pencil {
+  color: #00a67e;
+  cursor: pointer;
+}
+
+.discounts {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: center;
+  cursor: pointer;
+}
+

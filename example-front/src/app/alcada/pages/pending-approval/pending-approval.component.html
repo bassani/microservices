@@ -1,0 +1,100 @@
+<div class="card-container">
+
+  <!-- Título e subtitulo da tela -->
+  <div class="p-text p-mb-3 simulation-title">
+    <strong>Pendente de aprovação</strong>
+  </div>
+  <div class="p-text p-mb-6">
+    <small class="small-title">Utilize os filtros abaixo para buscar as aprovações.</small>
+  </div>
+  <p-card id="card-filters" class="simulation-content" >
+    <!-- Aqui vai os componentes com serviço chamando dados do back-end em cada um deles-->
+    <div class="p-grid" [formGroup]="form">
+      <div class="p-col-4">
+        <label class="label" for="registerDate">Data de envio para aprovação</label>
+        <p-calendar placeholder="Selecione o período..." id="simulated-on-calendar" class="full-width range-picker"
+          dateFormat="dd/mm/yy" selectionMode="range" formControlName="registerDate" selectionMode="range" name="registerDate" [showIcon]="true"
+          icon="pi pi-calendar">
+        </p-calendar>
+      </div>
+      <app-id-simulation id="track-idSimulation-select" class="p-col-4" [control]="getControl('idSimulation')"></app-id-simulation>
+      <app-users-select id="track-user-select" class="p-col-4" [control]="getControl('user')"></app-users-select>
+      <app-supplier id="track-supplier-select" class="p-col-4" [control]="getControl('supplier')">
+      </app-supplier>
+      <app-manufacturer-select id="track-manufacturer-select" class="p-col-4" [parentControl]="getControl('supplier')" [control]="getControl('manufacturer')">
+      </app-manufacturer-select>
+      <app-category id="report-category" class="p-col-4" [category]="getControl('category')" [showSubcategory]="false"></app-category>
+    </div>
+
+    <!-- Botões de limpar campos e de iniciar simulação -->
+    <div class="p-d-flex p-jc-end p-grid p-mt-3 p-ai-flex-end">
+
+      <div class="p-d-flex p-jc-end p-col-8 p-ai-end">
+        <button pButton pRipple type="button" label="Limpar Campos" class="btn p-button-rounded p-button-white" id="track-clean-button"
+        (click)="form.reset()"></button>
+        <button pButton pRipple type="submit" [disabled]="loading" [label]="loading ? ' ' : 'Buscar'" name="Buscar" class="p-button-success p-button-rounded p-ml-2" id="search-button" role="button"
+          (click)="search(0, 10)"><p-progressSpinner [strokeWidth]="'8'" class="p-mx-3 p-d-flex p-ai-center p-jc-center small-spinner" *ngIf="loading"></p-progressSpinner></button>
+      </div>
+
+
+    </div>
+
+  </p-card>
+
+  <p-card *ngIf="simulation$.value.content.length > 0">
+    <div class="p-text p-ml-3 p-mb-4 simulation-data">
+      <strong>Resultado da busca</strong>
+    </div>
+    <div>
+
+      <table aria-describedby="lista de simulações" class="full-width collapse-border p-ml-3 p-mb-4">
+        <tr>
+          <th scope="col" class="th-grid text-left" id="track-simulated-on">Simulado em</th>
+          <th scope="col" class="th-grid text-left" id="expiration-date">Data de expiração</th>
+          <th scope="col" class="th-grid text-left " id="track-user">ID da simulação</th>
+          <th scope="col" class="th-grid text-left " id="track-user">Usuário da Simulação</th>
+          <th scope="col" class="th-grid text-left" id="track-classification">Classificação</th>
+          <th scope="col" class="th-grid text-left" id="track-supplier">Fornecedor Pai</th>
+          <th scope="col" class="th-grid text-left" id="track-amount">Valor Compra (R$)</th>
+          <th scope="col" class="th-grid text-left" id="track-status">Status</th>
+          <th scope="col" class="th-grid text-left" id="historic">Histórico</th>
+          <th scope="col" class="th-grid text-left" id="approval">Aprovação</th>
+        </tr>
+        <tbody>
+          <tr class="p-ml-3" *ngFor="let simulation of (simulation$ | async)?.content;">
+            <td id="simulation_date_value" headers="" class="td-grid">{{simulation.registerDate | date: 'shortDate'}}</td>
+            <td id="simulation_date_value" headers="" class="td-grid">{{simulation.expirationDate | date: 'shortDate'}}</td>
+            <td id="simulation_type_value" class="td-grid">{{simulation.simulationId}}</td>
+            <td id="simulation_type_value" class="td-grid">{{simulation.simulationUserName}}</td>
+            <td id="simulation_classification_value" class="td-grid">{{simulation.classification?.name}}</td>
+            <td id="simulation_suppier_value" class="td-grid">{{asList(simulation.suppliers)}}</td>
+            <td id="simulation_amount_value" class="td-grid">{{(simulation.totalValue | currency: 'BRL') || '-'}}</td>
+            <td id="simulation_status_value" class="td-grid">
+              <button pRipple type="button" disabled class="btn chip" id="track-draft-button">{{simulation.status.name}}</button>
+            </td>
+            <td id="simulation_row_action" class="td-grid text-center">
+              <a>
+                <em class="pi pi-clock p-ml-1"></em>
+              </a>
+            </td>
+            <td id="simulation_row_action" class="td-grid text-center">
+              <a>
+                <em class="pi pi-check-circle p-ml-1"></em>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="p-d-flex full-width p-jc-center" *ngVar="(simulation$ | async) as state">
+        <p-paginator id="track-paginator" [first]="state.number * state.size" [rows]="state.size" [totalRecords]="state.totalElements"
+        [rowsPerPageOptions]="[10,15,20]"
+        [showCurrentPageReport]="true"
+        (onPageChange)="paginate($event)"
+        currentPageReportTemplate="pág. {currentPage} de {totalPages}"
+        [showJumpToPageDropdown]="false" [showPageLinks]="false"></p-paginator>
+      </div>
+
+    </div>
+  </p-card>
+
+</div>

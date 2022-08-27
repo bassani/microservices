@@ -1,0 +1,80 @@
+<div (focusin)="showBox()" class="p-p-0 p-d-flex p-flex-column">
+  <label class="label p-m-0">Novo prazo de pagamento</label>
+  <div class="full-width relative">
+  <input
+    pInputText
+    class="p-mt-1 term-input full-width"
+    [ngClass]="isInvalid ? 'invalid' : ''"
+    placeholder="Selecionar prazo"
+    [value]="termInputValue"
+    readonly
+    #paymentInput
+  />
+  <small *ngIf="isInvalid" class="error-hint">{{isInvalid.paymentTerm}}</small>
+  <button *ngIf="value" pButton type="button" (click)="clear()" icon="pi pi-times" class="p-button-rounded p-button-text clear-button"></button>
+
+</div>
+  <div
+    *ngIf="show"
+    #contents
+    class="list-wrapper p-d-flex p-flex-column p-col-12 p-p-0"
+  >
+    <div class="p-col-3 listbox-wrapper" >
+      <div class="p-d-flex radios-wrapper p-p-4">
+        <p-radioButton
+          name="typeradio"
+          [value]="paymentTypes.general"
+          label="Prazo Geral"
+          (click)="changeType(paymentTypes.general)"
+          [(ngModel)]="type.type"
+        ></p-radioButton>
+        <p-radioButton
+          name="typeradio"
+          (click)="changeType(paymentTypes.dc)"
+          label="Prazo por CD"
+          [value]="paymentTypes.dc"
+          [(ngModel)]="type.type"
+        ></p-radioButton>
+      </div>
+      <div class="p-col-12 p-d-flex p-flex-column items-wrapper p-p-3">
+        <div
+          *ngIf="type.type === paymentTypes.general; else byDC"
+          class="p-d-flex full-width p-jc-between p-ai-center p-my-3"
+        >
+          <p-dropdown
+            [options]="terms"
+            [(ngModel)]="type.generalTerm"
+            placeholder="Selecione"
+            class="p-col-12 terms-dropdown position-general-drop"
+            optionLabel="newPaymentTermDescription"
+            (onChange)="changed()"
+            [filter]="true"
+            [filterBy]="'newPaymentTermDescription'"
+            [showClear]="true"
+          ></p-dropdown>
+        </div>
+        <ng-template #byDC>
+          <div
+            class="p-d-flex p-jc-center p-ai-center position-dc-wrapper p-my-0"
+            *ngFor="let dc of type.distributionCenters"
+          >
+            <label class="lblDistribution">{{ dc.id }} - {{ dc.name }}</label>
+            <div class="dropdown">
+            <p-dropdown
+              [options]="terms"
+              [(ngModel)]="dc.term"
+              placeholder="Selecione"
+              class="p-col-8 terms-dropdown items-dropdown"
+              (onChange)="changed()"
+              optionLabel="newPaymentTermDescription"
+              [filter]="true"
+              [filterBy]="'newPaymentTermDescription'"
+              [showClear]="true"
+            ></p-dropdown>
+          </div>
+          </div>
+        </ng-template>
+      </div>
+</div>
+  </div>
+</div>

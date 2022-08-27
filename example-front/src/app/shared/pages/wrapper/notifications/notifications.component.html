@@ -1,0 +1,82 @@
+<div id="main-notification">
+  <p-menu #readNotification appendTo="body" [popup]="true" [model]="notificationOptions" [style]="{width:'auto',padding:'0px'}"></p-menu>
+  <p-menu #sortBy appendTo="body" [popup]="true" [model]="sortOptions" [style]="{width:'auto', padding:'0px'}"></p-menu>
+
+  <div class="notifications-header p-ai-center p-d-flex p-jc-between">
+    <span class="notification-text">Notificações Recentes</span>
+    <div class="ordanation">
+      <span class="mr10">
+        <em class="pi pi-sort-alt"></em>
+      </span>
+      <a class="sortButton" (click)="sortBy.toggle($event)">Ordenar por</a>
+    </div>
+  </div>
+
+  <div class="notifications-body">
+    <div class="emptyNotification" *ngIf="notifications?.totalElements == 0">
+      <h4>Nenhuma notificação encontrada</h4>
+    </div>
+    <div *ngIf="notifications?.content">
+      <div *ngFor="let notification of notifications?.content" [ngClass]="{'unread' : notification.read == false, 'activeExpiration' : notification.expirationDate}" class="notification-element">
+        <div *ngIf="notification.expirationDate">
+          <div class="mb5 notification-expiration p-ai-center p-d-flex p-jc-between">
+            <span><span class="text">Simulação expira em breve!</span></span>
+            <span
+              (click)="keyUser = notification.keycloakUserId;
+              notificationId = notification.id;
+              notificationRead = notification.read;
+              readNotification.toggle($event)">
+              <em class="pi pi-chevron-down"></em>
+            </span>
+          </div>
+          <div *ngIf="!approver" class="mb5 expiration-text">
+            <span>Após a expiração, não será possível realizar mais nenhuma ação para esta simulação</span>
+          </div>
+          <div *ngIf="approver" class="mb5 expiration-text">
+            <span>Após a expiração, não será possível aprovar esta simulação.</span>
+          </div>
+          <div class="mb5 notification-expiration">
+            <span><span class="bold">Expira em: </span>{{notification.expirationDate | date: 'dd/MM/yyyy'}} {{notification.expirationDate | date: 'h:mm a'}}</span>
+          </div>
+        </div>
+        <div *ngIf="!notification.expirationDate">
+          <div class="mb5 notification-status p-ai-center p-d-flex p-jc-between">
+            <span class="text">
+              {{notification.message.simulationStatus}}
+            </span>
+            <span
+              (click)="keyUser = notification.keycloakUserId;
+              notificationId = notification.id;
+              notificationRead = notification.read;
+              readNotification.toggle($event)">
+              <em class="pi pi-chevron-down"></em>
+            </span>
+          </div>
+          <div *ngIf="notification.message.completedBy != null" class="mb5 notification-finalApproval">
+            <span><span class="finalApprovalBy">POR:</span> {{notification.message.completedBy.name}}</span>
+          </div>
+        </div>
+
+        <div class="mb5 notification-id">
+          <span>ID: {{notification.message.simulationId}}</span>
+        </div>
+        <div class="mb5 notification-name">
+          <span>{{notification.message.parentSupplierName}} - {{notification.message.classification.name}}</span>
+        </div>
+        <div *ngIf="notification.message.reason != null && notification.message.simulationStatus === 'REPROVADO'" class="mb5 notification-finalApproval">
+          <span><span class="bold">Motivo:</span> {{notification.message.reason}}</span>
+        </div>
+        <div class="notification-date">
+          <span>{{notification.notificationDate | date: 'dd/MM/yyyy'}} {{notification.notificationDate | date: 'h:mm a'}}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="allNotification && notifications.content.length > 0" class="notifications-footer p-d-flex p-jc-center">
+    <a (click)="enviaModal()">Ver tudo</a>
+  </div>
+
+</div>
+

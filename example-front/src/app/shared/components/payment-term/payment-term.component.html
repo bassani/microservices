@@ -1,0 +1,10 @@
+<label class="label">Novo prazo de pagamento</label>
+<p-dropdown [options]="((paymentTerm$ | async)?.content || [])" optionLabel="conditionPaymentDescription" id="payment-term-input"
+  placeholder="Selecione" [filter]="true" filterBy="conditionPaymentDescription,id"
+  [formControl]="control">
+  <ng-template let-option pTemplate="item">
+    <div class="country-item" id="payment-multiSelect-choosen-option">
+      <div>{{option.conditionPaymentDescription}}</div>
+    </div>
+  </ng-template>
+</p-dropdown>

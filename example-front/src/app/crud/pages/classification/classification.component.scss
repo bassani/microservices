@@ -1,0 +1,48 @@
+/**
+Insert any classification crud page css styles here
+
+*/
+
+.table-wrapper {
+  padding: 12px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 24px;
+}
+.spinner-wrapper {
+  min-height: 300px;
+  width: 100%;
+}
+.full-width {
+  width: 100%;
+}
+.max-descrition {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 20%;
+  max-width: 300px;
+}
+
+
+:host::ng-deep.p-icon-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+:host::ng-deep.p-icon-button {
+  border-radius: 50% !important;
+  color: var(--green-600);
+  background: white;
+  border: none;
+  box-shadow: 0px 0px 6px -3px black;
+}
+
+:host::ng-deep.p-icon-button:hover {
+  border-radius: 50% !important;
+  color: var(--green-600);
+  background: #f4f4f4;
+  border: none;
+}

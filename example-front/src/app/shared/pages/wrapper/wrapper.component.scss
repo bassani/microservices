@@ -1,0 +1,126 @@
+:host {
+  .nav {
+    height: 64px;
+    width: 100%;
+    background-color: var(--green-800);
+    padding: 0px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .nav-title {
+      margin: 0px;
+      color: white;
+      display: flex;
+    }
+    .main-nav-user{
+      position: relative;
+      color: white;
+      .nav-user {
+        display: flex;
+        align-items: flex-end;
+        padding: 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        &:hover {
+          background: rgba(0, 0, 0, 0.2);
+        }
+        .userName{
+          padding: 0px 10px;
+        }
+      }
+      .nav-bell{
+        cursor: pointer;
+        position: relative;
+        margin-right: 20px;
+        padding: 10px;
+        border-radius: 100%;
+        .pi-bell{
+          position: relative;
+          font-size: 22px;
+          &.unread{
+            &:after{
+              content: "";
+              width: 10px;
+              height: 10px;
+              position: absolute;
+              background-color: red;
+              right: 0;
+              border-radius: 100%;
+              top: -4px;
+            }
+          }
+        }
+        &:hover{
+          background: rgba(0, 0, 0, 0.2);
+        }
+      }
+      .bellTip{
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        transform: rotate(45deg);
+        position: absolute;
+        bottom: -17px;
+        left: 10px;
+        z-index: 2;
+        border-radius: 4px;
+      }
+      #notifications{
+        z-index: 1;
+        width: 320px;
+        position: absolute;
+        top: 48px;
+        right: 60%;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
+      }
+      #modalNotification{
+
+        .modal {
+          background: #fff;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px #333;
+          width: 400px;
+          position: fixed;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 11;
+        }
+
+        .overlay {
+          background: #000;
+          height: 100vh;
+          left: 0;
+          opacity: 0.5;
+          position: fixed;
+          top: 0;
+          width: 100vw;
+          z-index: 10;
+        }
+      }
+    }
+
+  }
+  .container {
+    display: flex;
+    min-height: calc(100vh - 64px);
+    margin: 0px;
+    width: 100%;
+    background: #f2f2f2;
+  }
+
+  .content {
+    flex: 1;
+  }
+  .sidebar {
+    width: 250px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 0px 4px -2px var(--green-900);
+    margin-right: 12px;
+    position: relative;
+  }
+}

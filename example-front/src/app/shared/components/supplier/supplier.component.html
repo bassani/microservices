@@ -1,0 +1,19 @@
+
+
+<label class="label" id="supplier-label">Fornecedor Pai</label>
+<p-multiSelect class="full-width" id="supplier-select" #input (onFilter)="filterSuppliers($event, input)" placeholder="Digite..."
+  [options]="suppliers.content || []" optionLabel="name" [formControl]="control" [emptyMessage]="'Digite para pesquisar'"
+  [selectedItemsLabel]="'{0} fornecedores pai selecionados'"
+  filterBy="id,name"
+  [maxSelectedLabels]="2"
+  >
+  <ng-template let-option pTemplate="item">
+    <div class="option-item" id="supplier-option">
+      <div>{{option.id}} - {{option.name}}</div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="emptyfilter">
+      {{suppliers.status === 'LOAD' ? 'Carregando...' : 'Nenhum fornecedor pai encontrado'}}
+  </ng-template>
+
+</p-multiSelect>

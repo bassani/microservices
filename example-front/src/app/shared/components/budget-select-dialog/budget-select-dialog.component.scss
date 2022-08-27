@@ -1,0 +1,144 @@
+.pi-wallet {
+    color: #00a67e;
+    cursor: pointer;
+  }
+
+  
+  #current-product-selected {
+    display: flex;
+    align-items: center;
+    min-height: 39px;
+  }
+  
+  .budget-text {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: center;
+    cursor: pointer;
+  }
+  .pointer {
+    cursor: pointer;
+  }
+  .btn {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 19px;
+    text-align: center;
+  }
+  
+  .p-button-rounded.p-button-danger {
+    color: #ffffff;
+    margin: 0px;
+    background: #bf0000;
+    box-shadow: 0px 0px 6px -2px rgba(0, 0, 0, 0.25);
+    border-radius: 24px;
+    border: none;
+  }
+  
+  .p-button-rounded.p-button-danger:hover {
+    color: #ffffff;
+    background: #a70101;
+    box-shadow: 0px 0px 6px -1px rgba(0, 0, 0, 0.25);
+    border-radius: 24px;
+    border-color: rgb(202, 202, 202);
+  }
+  
+  .p-button-success {
+    color: #ffffff;
+    background: var(--primary-color);
+    box-shadow: 0px 0px 6px -1px rgba(0, 0, 0, 0.25);
+    border-radius: 24px;
+    border-color: #008a5a;
+    height: 41px;
+    left: 21.265869140625px;
+    top: 0px;
+  }
+  
+  .pi-pencil {
+    color: #00a67e;
+    cursor: pointer;
+  }
+  
+  .discounts {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .hint-text {
+    font-weight: bold;
+    color: #707070;
+    font-size: 13px;
+  }
+  
+  .btn-modal {
+    height: 32px;
+    margin-top: 20px;
+    border-radius: 100px;
+    background: #00a67e;
+  }
+  
+  .btn-close {
+    height: 41px;
+    width: 128px;
+    border-radius: 24px;
+    background: #bf0000;
+  }
+  
+  .btn-save {
+    height: 41px;
+    width: 128px;
+    border-radius: 24px;
+    background: #00a67e;
+  }
+  
+  .p-inputNumber {
+    margin-top: 5px !important;
+  }
+  
+  #discount-all-products-disabled {
+    width: 100%;
+    font-weight: 600;
+    font-size: 14px;
+    min-height: 40px;
+  }
+  
+  :host::ng-deep .grouped .p-inputnumber-input {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  
+  .gray-table {
+    background-color: #fbfbfb;
+    border-top: 2px solid #afafaf;
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  
+  .empty-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #8e8e8e;
+  }
+  
+  .wrapper-table-empty {
+    min-height: 180px;
+  }
+  
+  .empty-description {
+    font-weight: 500;
+    color: #8e8e8e;
+    text-align: center;
+  }
+  

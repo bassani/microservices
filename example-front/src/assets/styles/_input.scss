@@ -1,0 +1,148 @@
+.p-inputtext {
+  border-radius: 6px;
+
+  &:enabled:hover {
+    border-color: var(--primary-color);
+  }
+  &:enabled:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0px 0px 4px var(--green-300);
+  }
+}
+.p-autocomplete.p-component:not(.p-autocomplete-multiple) {
+  width: 100%;
+  input {
+    border: 1px solid #b3b3b3;
+    width: 100%;
+  }
+}
+
+.p-autocomplete.p-component.p-autocomplete-multiple {
+  width: 100%;
+  ul {
+    border: 1px solid #b3b3b3;
+  }
+  input {
+    width: 100%;
+  }
+}
+
+
+.p-inputgroup-addon:first-child,
+.p-inputgroup button:first-child,
+.p-inputgroup input:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.p-inputgroup-addon:last-child,
+.p-inputgroup button:last-child,
+.p-inputgroup input:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.password-input {
+  width: 100%;
+  .p-password {
+    width: 100%;
+    .p-password-input {
+      width: 100%;
+    }
+  }
+}
+
+.rd-input-group {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+
+.p-cascadeselect {
+  border-radius: 6px;
+  margin-top: 4px;
+  min-height: 39px;
+  width: 100%;
+  border: 1px solid #b3b3b3;
+}
+
+label {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  margin: 6px 8px;
+}
+
+.p-calendar {
+  width: 100%;
+  border-radius: 6px;
+  margin-top: 4px;
+  height: 39px;
+  & > .p-inputtext {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+  & > .p-datepicker {
+    width: auto;
+  }
+}
+
+.p-inputnumber.p-component {
+  width: 100%;
+  margin-top: 4px;
+  .p-inputnumber-input {
+    min-height: 39px;
+    border-radius: 6px;
+    border: 1px solid #b3b3b3;
+    &:enabled:hover {
+      border-color: var(--primary-color);
+    }
+    &:enabled:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0px 0px 4px var(--green-300);
+    }
+  }
+}
+.p-inputgroup.grouped {
+  .p-inputnumber.p-component {
+    width: 100%;
+    margin-top: 0px;
+  }
+}
+
+.p-multiselect.p-component {
+  border-radius: 6px;
+  margin-top: 4px;
+  max-width: 100%;
+  min-height: 39px;
+}
+.p-dropdown.p-component {
+  border-radius: 6px;
+  margin-top: 4px;
+  max-width: 100%;
+  min-height: 39px;
+}
+
+.p-invalid {
+  color: var(--pink-500);
+}
+
+.ng-touched .ng-invalid {
+  border-color: var(--pink-500);
+  .p-component, &.p-component {
+    border-color: var(--pink-500) !important;
+  }
+}
+
+  
+.p-filter-text {
+  color: #00a67e;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}

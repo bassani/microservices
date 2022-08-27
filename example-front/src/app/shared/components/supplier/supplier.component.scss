@@ -1,0 +1,21 @@
+label {
+  font-weight: bold;
+  margin: 6px 8px;
+  color: black;
+}
+
+:host::ng-deep.p-autocomplete {
+  width: 100%;
+  margin-top: 4px;
+  & > .p-component {
+    width: 100%;
+  }
+}
+:host::ng-deep.p-autocomplete-multiple-container.p-component.p-inputtext {
+  max-height: 80px;
+  overflow-y: overlay scroll;
+}
+
+:host::ng-deep.p-autocomplete-token {
+  margin: 2px 0px;
+}

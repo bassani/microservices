@@ -1,0 +1,40 @@
+#card-filters{
+  margin: 30px 12px;
+  margin-top: 50px;
+  width: auto;
+  margin-left: 30px;
+  background: #ffffff;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+.expiration-title {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: #000000;
+  margin-left: 32px;
+  margin-top: 48px;
+}
+
+.active-status {
+  background-color: #D1E5CA;
+}
+
+.desactive-status {
+  background-color: #E3E3E3;
+}
+
+.collapse-border {
+  border-spacing: 16px;
+  border-collapse: initial;
+}
+
+.big-text {
+  width: 200px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}

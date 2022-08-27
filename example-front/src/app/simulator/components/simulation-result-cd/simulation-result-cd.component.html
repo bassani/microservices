@@ -1,0 +1,55 @@
+<table class="full-width collapse-border" aria-describedby="Tabela de resultado por CD">
+  <tr class="spaced-tr">
+    <th colspan="10" id="th-basic-section"></th>
+    <th colspan="4" id="th-amounts-section" class="important-cell center">Valor Compra (R$)</th>
+    <th colspan="3" id="th-coverage-section" class="center">Cobertura Estoque (Dias)</th>
+  </tr>
+  <tr>
+    <th class="left" id="th-nr-relatorio">Número<br> Relatorio</th>
+    <th class="center" id="th-cd-id">Código<br> CD</th>
+    <th class="left" id="th-provider">Fornecedor <br> Pai</th>
+    <th class="left" id="th-manufacturer">Nome<br> Fabricante</th>
+    <th class="center" id="th-te">Lead<br> Time - TE</th>
+    <th class="center" id="th-tf">Frequência<br> Compra - TF</th>
+    <th class="center" id="th-default-term">Prazo <br> Regular</th>
+    <th class="center" id="th-new-term">Novo <br> Prazo</th>
+    <th class="center" id="th-new-term">Delta <br> Prazo</th>
+    <th class="right" id="th-qty">Total <br> Unidades</th>
+
+    <th class="right important-cell" id="th-regular-price">Regular</th>
+    <th class="right important-cell" id="th-negotiated-price">Negociado</th>
+    <th class="right important-cell" id="th-gain">Ganho (R$)</th>
+    <th class="right important-cell" id="th-gain">Ganho (%)</th>
+
+    <th class="center" id="th-coverage-cd">Atual<br> CD</th>
+    <th class="center" id="th-coverage-final">Após<br> Compra CD</th>
+    <th class="center" id="th-coverage-grid">Rede<br> CD/Loja</th>
+    <th class="center" id="th-coverage-grid">DDE<br> Compra</th>
+  </tr>
+
+  <tbody>
+    <tr *ngFor="let simulation of simulationByCd">
+      <td class="left">{{simulation.simulationId}}</td>
+      <td class="center">{{simulation.distributionCenterId}}</td>
+      <td class="left">{{simulation.supplierName}}</td>
+      <td class="left">{{simulation.supplierName}}</td>
+      <td class="center">{{simulation.leadTime}}</td>
+      <td class="center">{{simulation.frequencyTime}}</td>
+      <td class="center">{{simulation.regularTermInDaysQuantity}}</td>
+      <td class="center">{{simulation.newTermInDaysQuantity}}</td>
+      <td class="center">{{simulation.deltaTermInDaysQuantity}}</td>
+      <td class="right">{{simulation.orderedQty}}</td>
+
+      <td class="right important-cell  whitespace-pre">{{simulation.totalAmountWithRegularDiscount | currency: 'BRL'}}</td>
+      <td class="right important-cell  whitespace-pre">{{simulation.totalAmountWithNegotiatedDiscount | currency: 'BRL'}}</td>
+      <td class="right important-cell  whitespace-pre">{{simulation.gain | currency: 'BRL'}}</td>
+      <td class="right important-cell">{{simulation.percentageGain | percent: '1.2-2'}}</td>
+
+      <td class="center">{{simulation.dailyCDStock}}</td>
+      <td class="center">{{simulation.dailyFinalStock}}</td>
+      <td class="center">{{simulation.dailyGridStock}}</td>
+      <td class="center">{{simulation.stockDaysPurchase || 0}}</td>
+    </tr>
+
+  </tbody>
+</table>

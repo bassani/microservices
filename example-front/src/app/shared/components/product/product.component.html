@@ -1,0 +1,4 @@
+<label id="product-label" class="label">Produto</label>
+<p-autoComplete id="product-select" [formControl]="control" placeholder="Selecione os produtos..."
+  [suggestions]="(products$ | async) || []" (completeMethod)="getProducts($event)" [multiple]="false" field="name">
+</p-autoComplete>

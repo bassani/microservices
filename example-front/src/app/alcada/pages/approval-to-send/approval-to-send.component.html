@@ -1,0 +1,84 @@
+<div class="card-container">
+
+  <div class="p-text p-mb-3 approval-to-send-title">
+    <strong>Aprovadas para envio</strong>
+  </div>
+  <div class="p-text p-mb-6">
+    <small class="small-title">
+      Utilize os filtros abaixo para consultar
+    </small>
+  </div>
+  <div [formGroup]="form">
+    <p-card id="card-filters" class="simulation-content">
+      <div class="p-grid">
+        <div class="p-col-4">
+          <label class="label" for="registerDate">Simulado em</label>
+          <p-calendar placeholder="Selecione o período..." id="simulated-on-calendar" class="full-width range-picker"
+            dateFormat="dd/mm/yy" formControlName="registerDate" name="registerDate" [showIcon]="true"
+            icon="pi pi-calendar">
+          </p-calendar>
+        </div>
+        <div class="p-col-4">
+          <app-users-select id="track-user-select" class="p-col-4" [control]="getControl('user')"></app-users-select>
+        </div>
+      </div>
+      <div class="p-col-4 w-full pl-0">
+        <app-supplier [control]="getControl('supplier')"></app-supplier>
+      </div>
+      <div class="p-col-4 w-full pl-0">
+        <app-manufacturer-select [control]="getControl('manufacturer')" [parentControl]="getControl('supplier')">
+        </app-manufacturer-select>
+      </div>
+
+      <div class="p-d-flex p-jc-end p-grid p-mt-3 p-ai-flex-end">
+
+        <div class="p-d-flex p-jc-end p-col-8 p-ai-end">
+          <button (click)="clearForm()" pButton pRipple type="button" label="Limpar Campos" class="btn p-button-rounded p-button-white"
+            id="track-clean-button"></button>
+          <button (click)="submit()" pButton pRipple type="submit" label="Buscar" name="Buscar"
+            class="p-button-success p-button-rounded p-ml-2" id="search-button" role="button"></button>
+        </div>
+      </div>
+    </p-card>
+
+
+    <p-card>
+      <div class="p-text p-ml-3 p-mb-4 simulation-data">
+        <strong>Resultado da consulta</strong>
+      </div>
+      <table aria-describedby="lista de simulações" class="full-width collapse-border p-ml-3 p-mb-4">
+        <tr>
+          <th scope="col" class="th-grid text-left" id="expiration-type">ID da simulação</th>
+          <th scope="col" class="th-grid text-left" id="expiration-type">Usuário da simulação</th>
+          <th scope="col" class="th-grid text-left" id="expiration-status">Aprovador final</th>
+          <th scope="col" class="th-grid text-left" id="expiration-status">Fornecedor Pai</th>
+          <th scope="col" class="th-grid text-left" id="expiration-status">Valor da compra (R$)</th>
+          <th scope="col" class="th-grid text-left" id="expiration-status">Status</th>
+          <th scope="col" class="th-grid text-left" id="expiration-status">Emissão do pedido</th>
+          <th scope="col" class="th-grid text-left" id="expiration-status">Envio do pedido</th>
+        </tr>
+        <tbody>
+          <tr class="p-ml-3" *ngFor="let item of simulationsList">
+            <td id="simulation_date_value" headers="" class="td-grid">{{item.id}}
+            </td>
+            <td id="simulation_date_value" headers="" class="td-grid">{{item.simulationUserName}}</td>
+            <td id="simulation_date_value" headers="" class="td-grid">{{item.finalApproverName}}</td>
+            <div *ngFor="let supplier of item.suppliers">
+              <td id="simulation_date_value" headers="" class="td-grid">
+                {{supplier.parentSupplierName}}
+              </td>
+            </div>
+            <td id="simulation_date_value" headers="" class="td-grid">{{item.totalAmountWithNegotiatedDiscount}}</td>
+            <td id="simulation_date_value" headers="" class="td-grid">{{item.status.name}}</td>
+            <td id="simulation_date_value" headers="" class="td-grid text-center color-green">
+              <em class="pi pi-check-square cursor-point"></em>
+            </td>
+            <td id="simulation_date_value" headers="" class="td-grid text-center color-green">
+              <em class="pi pi-check-square cursor-point"></em>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </p-card>
+  </div>
+</div>

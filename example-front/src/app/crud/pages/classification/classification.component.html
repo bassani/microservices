@@ -1,0 +1,80 @@
+<div class="card-container">
+    <div class="p-text p-ml-5 p-mt-5 title" id="page-title">Cadastro de classificação</div>
+    <div class="p-text p-mb-5 p-ml-5 p-mt-3 subtitle" id="page-plain-subtitle">Adicionar, editar, habilitar e desabilitar cadastros de classificações para as simulações.</div>
+      <p-card class="p-m-5"  id="rd-card-results">
+        <ng-template pTemplate="header">
+            <div class="p-d-flex p-jc-between p-align-center p-flex-wrap">
+                <h3 class="p-ml-5">Classificações cadastradas</h3>
+                <div>
+                    <button pButton icon="pi pi-download" pRipple class="btn p-button-rounded p-button-success p-m-3"
+                        label="Exportar cadastro vigente" id="download-current-classifications-btn"
+                        (click)="downloadCurrentClassifications()"></button>
+                    <button pButton icon="pi pi-plus" pRipple
+                        class="btn p-button-rounded p-button-success p-mt-3 p-mb-3 p-mr-5" withRoles [roles]="['create_classification']" label="Novo cadastro"
+                        id="add-classification-btn" (click)="editOrAddClassification(form.getRawValue())"></button>
+
+                </div>
+            </div>
+
+        </ng-template>
+        <div class="p-d-flex p-jc-center p-flex-column p-flex-wrap" *ngVar="(classifications$ | async) as state">
+
+            <div class="p-grid p-align-center full-width p-d-flex p-jc-between">
+                <div class="p-col-1">
+                    <button pButton icon="pi pi-refresh" (click)="changePage(state.page, state.size)" class="p-icon-button"></button>
+                </div>
+                <div class="p-col-10 p-d-flex p-jc-end">
+                    <p-paginator id="top-paginator" [first]="state.number * state.size" [rows]="state.size" [totalRecords]="state.totalElements" 
+                    [rowsPerPageOptions]="[10,20,30]"
+                    [showCurrentPageReport]="true"
+                    (onPageChange)="paginate($event)"
+                    currentPageReportTemplate="pág. {currentPage} de {totalPages}"
+                    [showJumpToPageDropdown]="false" [showPageLinks]="false"></p-paginator>
+                </div>
+            </div>
+
+            <div class="p-grid p-align-center full-width table-wrapper p-d-flex" >
+                <div class="spinner-wrapper p-d-flex p-align-center p-jc-center"  *ngIf="state.status == 'LOADING'">
+            
+                    <p-progressSpinner id="classification-list-spinner"></p-progressSpinner>
+
+                </div>
+                <table aria-describedby="lista de classificações" class="full-width" id="classification-table" *ngIf="state.status == 'READY'">
+                    <thead id="classification-table-head">
+                        <tr>
+                            <th class="text-start" id="table-head-name">Nome</th>
+                            <th class="text-start" id="table-head-description">Descrição</th>
+                            <th class="text-center" id="table-head-status">Status</th>
+                            <th class="text-end" id="table-head-actions">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="classification-table-body">
+                        <tr [id]="'classification-table-item-' + classification.id" *ngFor="let classification of state?.content">
+                            <td id="classification-table-item-name">{{classification.name}}</td>
+                            <td id="classification-table-item-description" class="max-descrition">{{classification.description}}</td>
+                            <td id="classification-table-item-status" class="text-center">{{classification.active}}</td>
+                            <td id="classification-table-item-actions" class="text-end">
+                                <button pButton id="edit-classification-btn"  class="p-icon-button p-button-white" (click)="editOrAddClassification(classification)" icon="pi pi-pencil" withRoles [roles]="['update_classification']" ></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="p-grid p-align-center full-width p-d-flex p-jc-between">
+                <div class="p-col-1">
+                    <button pButton icon="pi pi-refresh" (click)="changePage(state.page, state.size)" class="p-icon-button"></button>
+                </div>
+                <div class="p-col-10 p-d-flex p-jc-end">
+                    <p-paginator id="bottom-paginator" [first]="state.number * state.size" [rows]="state.size" [totalRecords]="state.totalElements" 
+                    [rowsPerPageOptions]="[10,20,30]"
+                    (onPageChange)="paginate($event)"
+                    currentPageReportTemplate="pág. {currentPage} de {totalPages}"
+                    [showCurrentPageReport]="true"
+                    [showJumpToPageDropdown]="false" [showPageLinks]="false"></p-paginator>
+                </div>
+            </div>
+        </div>
+    </p-card>
+</div>

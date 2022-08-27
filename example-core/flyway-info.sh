@@ -1,0 +1,1 @@
+mvn clean flyway:info -Dflyway.configFiles=src/main/resources/flyway.conf

@@ -1,0 +1,92 @@
+#main-notification{
+  color: #495057;
+  .notifications-header{
+    color: #495057;
+    padding: 15px 20px;
+    font-size: 14px;
+    .notification-text{
+      color: #959595;
+    }
+    .ordanation{
+      .pi-sort-alt{
+        font-size: 12px;
+      }
+    }
+  }
+  .notifications-body{
+    overflow-y: auto;
+    max-height: 500px;
+    .emptyNotification{
+      padding: 10px 25px;
+      text-align: center;
+      h4{
+        margin: 0px;
+      }
+    }
+    .notification-element{
+      position: relative;
+      padding: 10px 25px;
+      background-color: #ffffff;
+      border-bottom: 2px solid #e3e8e7;
+      font-size: 14px;
+      .expiration-text{
+        text-decoration: underline;
+        font-style: italic;
+      }
+
+      .notification-status{
+        .notificationOptions{
+          position: relative;
+          #showNotificationRead{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 200px;
+            background-color: #fff;
+          }
+        }
+      }
+      .notification-finalApproval{
+        .finalApprovalBy{
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+      }
+      .notification-date{
+        color: #959595;
+      }
+      &.unread{
+        background-color: #e5f6f2 !important;
+        &:before{
+          content: "";
+          width: 8px;
+          height: 8px;
+          background-color: red;
+          position: absolute;
+          left: 10px;
+          border-radius: 100%;
+          top: 15px;
+        }
+        &.activeExpiration{
+          background-color: #fbedc0 !important;
+        }
+      }
+    }
+    .text{
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 15px;
+      overflow-wrap: anywhere;
+    }
+  }
+  .notifications-footer{
+    padding: 10px;
+    width: 100%;
+  }
+  a{
+    color: black;
+    text-decoration: underline;
+  }
+
+}
+

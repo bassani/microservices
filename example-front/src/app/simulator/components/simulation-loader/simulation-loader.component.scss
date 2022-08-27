@@ -1,0 +1,33 @@
+.loader-img {
+    min-height: 400px;
+    height: 45px
+}
+  .header {
+      font-weight: bold;
+      font-size: 24px
+  }
+    .subheader {
+        font-size: 14px;
+    }
+
+  .loading:after {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    -webkit-animation: ellipsis steps(4,end) 1200ms infinite;      
+    animation: ellipsis steps(4,end) 1200ms infinite;
+    content: "\2026"; /* ascii code for the ellipsis character */
+    width: 0px;
+  }
+  
+  @keyframes ellipsis {
+    to {
+      width: 24px;    
+    }
+  }
+  
+  @-webkit-keyframes ellipsis {
+    to {
+      width: 24px;    
+    }
+  }

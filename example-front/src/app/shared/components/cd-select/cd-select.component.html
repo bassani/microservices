@@ -1,0 +1,12 @@
+<div id="cd-multi-select-wrapper" class="simulation-content">
+  <label id="cd-multi-select-label" class="label p-ml-2">CD {{fieldUtils.isRequired(control) ? '*' : ''}}</label>
+  <p-multiSelect id="cd-multi-select-element" placeholder="Selecione os CDs..." class="full-width"
+    [maxSelectedLabels]="1" filterBy="name,id" optionLabel="id" [selectedItemsLabel]="'{0} CDs selecionados'"
+    [formControl]="control" [options]="(suggestions$ | async) || []">
+    <ng-template let-option pTemplate="item">
+      <div class="option-item" id="cd-multi-select-choosen-option">
+        <div>{{option.id}} - {{option.name}}</div>
+      </div>
+    </ng-template>
+  </p-multiSelect>
+</div>

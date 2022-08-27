@@ -1,0 +1,8 @@
+<div class="simulation-content">
+  <div>
+    <label class="label p-ml-2">Classificação da simulação {{fieldUtils.isRequired(control) ? '*' : ''}}</label>
+  </div>
+  
+  <p-dropdown appendTo="body" [options]="((classifications$ | async)?.content || [])" placeholder="Selecione" optionLabel="name"
+    id="classification-dropdown" [filter]=true [formControl]="control"></p-dropdown>
+</div>

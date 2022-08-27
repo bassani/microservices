@@ -1,0 +1,53 @@
+label {
+  font-weight: bold;
+  margin: 6px 8px;
+  color: black;
+}
+
+:host::ng-deep.p-autocomplete {
+  width: 100%;
+  margin-top: 4px;
+  & > .p-component {
+    width: 100%;
+  }
+}
+:host::ng-deep.p-autocomplete-multiple-container.p-component.p-inputtext {
+  max-height: 80px;
+  overflow-y: overlay scroll;
+}
+
+:host::ng-deep.p-autocomplete-token {
+  margin: 2px 0px;
+}
+
+
+.label {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  margin: 6px 8px;
+}
+
+.small-card {
+  margin-left: 10px;
+  max-width: 18rem;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 14px;
+  color: #767676;
+}
+
+.small-manufacturer {
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.paddingless {
+  padding: 0px;
+}
+

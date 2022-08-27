@@ -1,0 +1,39 @@
+<div class="card-container">
+
+  <!-- Título e subtitulo da tela -->
+  <div class="p-text p-mb-3 simulation-title">
+    <strong>Nova simulação</strong>
+  </div>
+  <div class="p-text p-mb-6 p-d-flex small-title p-flex-column m-b-14">
+    <small>Bem-vindo ao simulador de pedidos.<br></small>
+    <small>Pesquise e selecione o tipo da simulação que melhor encaixe nas suas necessidades para continuar.</small>
+    <!-- CAMPO DE PESQUISA -->
+    <div class="p-col-4 paddingless p-d-flex p-flex-column spaced">
+      <label class="label">Pesquisar</label>
+      <input [formControl]="searchControl" id="search-type-input" type="text" placeholder="Digite para pesquisar"
+        pInputText />
+    </div>
+    <!-- CAMPO DE PESQUISA -->
+
+    <p-divider class="right-marg double-border"></p-divider>
+
+  </div>
+
+  <ng-container *ngVar="(simulationTypes$ | async) as state">
+    <!-- LOADER DE PESQUISA-->
+    <div class="p-d-flex p-jc-center" *ngIf="!state.ready">
+      <p-progressSpinner id="load-spinner"></p-progressSpinner>
+    </div>
+    <!-- LOADER DE PESQUISA-->
+
+    <!-- LISTA DE OPÇÔES-->
+    <div class="p-d-flex p-flex-wrap">
+      <div *ngFor="let option of state.content" class="p-col-12 p-md-4 p-lg-3 p-sm-6 p-xs-12">
+        <rd-choice style="padding-left: 12px; height: 100%" [id]="option.key" [title]="option.title"
+          [icon]="option.icon" [content]="option.description" (click)="selectType(option)" [svg]="option.svg">
+        </rd-choice>
+      </div>
+    </div>
+    <!-- LISTA DE OPÇÔES-->
+  </ng-container>
+</div>

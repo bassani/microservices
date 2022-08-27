@@ -1,0 +1,16 @@
+<div class="sidebar">
+    <!-- LOGO -->
+    <div class="logo-holder">
+        <img class="sidebar-logo" alt="RD" width="150" src="/assets/imgs/logo_only_rd.svg">
+        <span class="description">Jornada de Compras</span>
+    </div>
+    <!-- LOGO -->
+
+    <!-- MENU ITEMS -->
+    <div class="sidebar-container">
+        <p-panelMenu [multiple]="false" [model]="($menu | async) || []" [style]="{'width':'100%'}"></p-panelMenu>
+    </div>
+    <!-- MENU ITEMS -->
+
+    <div class="version">V{{version}}</div>
+</div>

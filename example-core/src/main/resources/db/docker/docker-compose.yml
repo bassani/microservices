@@ -1,0 +1,11 @@
+version: "3.3"
+services:
+    dbjor:
+        container_name: dbjor
+        image: container-registry.oracle.com/database/express
+        volumes:
+            - .:/opt/oracle/scripts/setup
+        ports:
+            - 1521:1521
+        environment:
+            - ORACLE_PWD=Oracle1

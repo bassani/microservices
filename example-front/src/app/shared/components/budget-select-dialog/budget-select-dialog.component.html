@@ -1,0 +1,85 @@
+<div class="p-d-flex p-flex-column p-ml-1" >
+
+    <div class="p-d-flex" id="budget-dialog-trigger" (click)="showModal()">
+      <em class="pi pi-wallet"></em>
+      <div class="p-text p-ml-1 budget-text" >Verba</div>
+    </div>
+  
+    <div class="p-text hint-text" id="current-budget-selected">
+      <div *ngIf="!!(budgetForm.get('value')?.value > 0 ); else noBudget">
+        <span id="budget-selected" class="p-d-flex flex-row p-jc-end">
+          <span *ngIf="isSavedPercent; else isValue">Verba de {{budgetForm.get('value')?.value}}%</span>
+          <ng-template #isValue>
+            <span>
+              Verba de {{budgetForm.get('value')?.value | currency: 'BRL'}}       
+            </span>
+          </ng-template>
+          <em  pTooltip="Remover verba" (click)="removeBudget()" class="p-px-2 pi pi-times pointer"></em>
+        </span>
+      </div>
+      <ng-template #noBudget>
+        Nenhuma verba aplicada
+      </ng-template>
+    </div>
+  
+  </div>
+  
+  <p-dialog id="budget-dialog" [(visible)]="displayModal" position="top"
+    [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="header">
+      <div class="p-grid ">
+        <div class="p-col-12 rd-dialog-title">Editar Verba</div>
+        <div class="p-col-12 rd-dialog-subtitle">
+          Selecione o tipo de valor (% ou R$) e digite o valor e motivo da verba.
+        </div>
+
+        <div class="p-grid full-width p-col-12 col-12" [formGroup]="budgetLocalForm">
+          <div class="p-col-12 p-d-flex p-flex-row full-width">
+            <div>
+              <p-radioButton name="type" inputId="percentageBudget" [value]="budgetTypes.percentage" formControlName="type"></p-radioButton>
+              <label for="percentageBudget">Porcentagem</label>
+            </div>
+            <div>
+              <p-radioButton name="type" inputId="currencyBudget" [value]="budgetTypes.currency" formControlName="type"></p-radioButton>
+              <label for="currencyBudget">Reais</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+
+    <div class="p-grid p-col-12 col-12" [formGroup]="budgetLocalForm">
+        <div class="p-col-12 col-12 full-width" *ngIf="budgetLocalForm">
+          <p-inputNumber
+            [mode]="isPercent ? 'decimal' : 'currency'"
+            [minFractionDigits]="2"
+            [maxFractionDigits]="2"
+            [suffix]="isPercent ? '%' : ''"
+            locale="pt-BR"
+            [min]="0"
+            [max]="isPercent ? 100 : 999999999999"
+            formControlName="value"
+            currency="BRL"
+            [placeholder]="isPercent ? '0%' : 'R$ 0,00'"
+            >
+          </p-inputNumber>
+        </div>
+        <div class="p-col-12 col-12 full-width">
+          <textarea class="full-width" maxlength="50" pInputTextarea formControlName="reason" placeholder="Motivo"></textarea>
+          <small id="reason-string-count" class="full-width p-d-flex p-jc-end">{{budgetLocalForm.get('reason')?.value?.length || 0}}/50</small>
+
+        </div>
+    </div>
+  
+    <p-footer>
+      <div class="p-d-flex p-jc-end button-grid p-mr-3">
+        <button pButton pRipple type="button" (click)="closeModal()" label="Cancelar"
+          class="btn btn-close p-button-rounded p-button-danger" id="budget-modal-close"></button>
+        <button pButton pRipple type="button" (click)="save()" label="Salvar" class="btn btn-save p-button-success p-button-rounded"
+          id="budget-modal-save"></button>
+      </div>
+    </p-footer>
+  
+  </p-dialog>
+  

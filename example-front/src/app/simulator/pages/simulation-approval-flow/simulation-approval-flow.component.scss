@@ -1,0 +1,23 @@
+.big-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #707070;
+}
+
+.label-item {
+    font-weight: 500;
+    color: #707070;
+}
+
+:host::ng-deep.card-resalted {
+    .p-card-body {
+        padding: 8px 24px !important;
+    }
+}
+
+:host::ng-deep.graph-card {
+    .p-card {
+        width: 98% !important;
+
+    }
+}

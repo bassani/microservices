@@ -1,0 +1,22 @@
+.forecast-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+:host::ng-deep.p-card-title {
+  font-weight: 500;
+  font-style: normal;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+:host::ng-deep .choice > .p-card > div {
+  margin: 0px;
+}
+
+:host::ng-deep #rd-card > div > div > div.p-card-title {
+  margin: 8px 20px;
+}
+
+:host::ng-deep .rd-choice > .rd-choice-card > div {
+  margin: 8px 0px;
+}

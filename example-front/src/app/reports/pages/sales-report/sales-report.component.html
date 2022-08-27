@@ -1,0 +1,39 @@
+<div class="card-container">
+
+  <!-- Título e subtitulo da tela -->
+  <div class="p-text p-mb-3 simulation-title">
+    <strong>Relatório de Vendas</strong>
+  </div>
+  <div class="p-text p-mb-6">
+    <small class="small-title">Adicione os parâmetros do relatorio e clique em <strong>Exportar dados</strong> para
+      gerar o
+      relatório.</small>
+  </div>
+
+  <p-card class="simulation-content" *ngIf="form">
+    <!-- Aqui vai os componentes com serviço chamando dados do back-end em cada um deles-->
+    <div class="p-d-flex p-flex-wrap p-align-center">
+      <app-cd-select id="report-cd-select" class="p-col-4 p-lg-4 p-md-5 p-sm-12 p-xs-12" [control]="getControl('distributionCenters')">
+      </app-cd-select>
+      <app-supplier id="repor-supplier" class="p-col-4 p-lg-4 p-md-5 p-sm-12 p-xs-12" [control]="getControl('supplier')"></app-supplier>
+      <app-manufacturer-filter class="p-col-4 p-lg-4 p-md-5 p-sm-12 p-xs-12"  [control]="getControl('manufacturers')"  id="report-manufacturer-filter"></app-manufacturer-filter>
+      <app-category id="report-category" class="p-col-4 p-lg-4 p-md-5 p-sm-12 p-xs-12" [category]="getControl('category')" [showSubcategory]="false"></app-category>
+      <app-product-filter class="p-col-4 p-lg-4 p-md-5 p-sm-12 p-xs-12" [control]="getControl('product')"  id="report-product-filter"></app-product-filter>
+      <p-checkbox id="report-inactives-checkbox" [formControl]="getControl('onlyInactives')" [binary]="true" label="Somente produtos inativos"
+        class="p-col-4 p-lg-4 p-md-5 p-sm-12 p-xs-12">
+      </p-checkbox>
+
+
+    </div>
+
+    <!-- Botões de limpar campos e de iniciar simulação -->
+    <div class="p-d-flex p-jc-end button-grid">
+      <button pButton pRipple type="button" label="Limpar Campos" class="btn p-button-rounded p-button-white" id="report-clean-button"
+        (click)="cleanButton()"></button>
+      <button pButton pRipple type="submit" label="Exportar dados" class="btn p-button-success" id="report-start-button"
+        (click)="exportData()"></button>
+    </div>
+
+  </p-card>
+
+</div>

@@ -1,0 +1,57 @@
+* {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+.main{
+  .side{
+    width: 50%;
+    .content-side{
+      .main-element{
+        margin-bottom: 1rem;
+        .financial-element{
+          margin-right: 20px;
+          width: 55%;
+        }
+        .financial-result{
+          width: calc(45% - 20px);
+        }
+        &:last-child{
+          margin-bottom: 0px;
+        }
+      }
+    }
+  }
+  .opb-main{
+    a{
+      color: #000;
+    }
+  }
+}
+
+.subtle-headers th {
+    font-size: 12px !important;
+    font-weight: 600;
+    color: #4F4F4F;
+    text-align: left;
+}
+.prominent-cell {
+    background: #F7F6F6;
+    text-align: center;
+    min-height: 32px;
+    height: 32px;
+    span {
+        padding: 6px;
+        min-height: 20px;
+    }
+}
+.indicators-body {
+    font-weight: 400;
+    color: black;
+    font-size: 14px;
+}
+
+.indicators-table     {border-collapse: separate;  border-spacing: 16px 12px; min-width: 100%;}
+
+.spacer-th {
+    width: 10%;
+}

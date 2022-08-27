@@ -1,0 +1,47 @@
+<div class="p-col-12 title p-mb-1">
+    Alçada: <span class="bold">{{resultSummary.approvalCompetencyName || 'N/A'}}</span>
+</div>
+<div class="p-col-12 title">
+    Pedido
+</div>
+<div class="p-col-12 p-d-flex p-flex-wrap contents p-mb-3 p-pl-0 p-pt-0">
+    <div class="p-col-6"><span>Classificação do Pedido: </span> <span class="bold">{{resultSummary.orderClassification}}</span></div>
+    <div  class="p-col-6"><span>Valor: </span> <span class="bold">{{resultSummary.purchaseValue | currency: 'BRL'}}</span></div>
+    <div  class="p-col-6"><span>Fornecedor pai: </span> <span class="bold">{{resultSummary.parentSupplierName || 'N/A'}}</span></div>
+    <div class="p-col-6"><span>Base para Cálculo: </span> <span class="bold">{{resultSummary.calculationBasisName}}</span></div>
+</div>
+
+
+<div class="p-col-12 title">
+    Negociação
+</div>
+<div class="p-col-12 p-d-flex p-flex-wrap contents p-mb-3 p-pl-0 p-pt-0">
+    <div class="p-col-4">
+        <div class="p-my-1"><span>Prazo regular (Dias): </span> <span class="bold">{{resultSummary.regularTermInDaysQuantity}}</span></div>
+        <div class="p-my-1"><span>Prazo negociado (Dias): </span> <span class="bold">{{resultSummary.newTermInDaysQuantity}}</span></div>
+        <div class="p-my-1"><span>Delta prazo: </span> <span class="bold">{{resultSummary.deltaTermInDaysQuantity}}</span></div>
+    </div>
+    <div class="p-col-4">
+        <div class="p-my-1"><span>Pagamento regular: </span> <span class="bold">{{resultSummary.regularPaymentDate | date: 'shortDate'}}</span></div>
+        <div class="p-my-1"><span>Pagamento negociado: </span> <span class="bold">{{resultSummary.negotiatedPaymentDate | date: 'shortDate'}}</span></div>
+        <div class="p-my-1"><span>Impacto no ciclo de caixa: </span> <span class="bold">{{resultSummary.cashFlowImpact | currency: 'BRL'}}</span></div>
+    </div>
+    <div class="p-col-2">
+        <div class="p-my-1"><span>Tipo verba: </span> <span class="bold">{{resultSummary.budgetType || '-'}}</span></div>
+        <div class="p-my-1"><span>Verba (%): </span> <span class="bold">{{resultSummary.informedBudgetValue}}%</span></div>
+    </div>
+    <div class="p-col-2">
+        <div class="p-my-1"><span>Ganho: </span> <span class="bold">{{resultSummary.gain | currency: 'BRL'}}</span></div>
+    </div>
+</div>
+
+
+<div class="p-col-12 title">
+    Estoque
+</div>
+<div class="p-col-12 p-d-flex p-flex-wrap contents p-mb-3 p-pl-0 p-pt-0">
+    <div class="p-col-2"><span>DDE Compra: </span> <span class="bold">{{resultSummary.stockDaysPurchase}}</span></div>
+    <div class="p-col-2"><span>DDE Atual - CD: </span> <span class="bold">{{resultSummary.dailyCDStock}}</span></div>
+    <div class="p-col-2"><span>DDE Final CDs: </span> <span class="bold">{{resultSummary.dailyFinalStock}}</span></div>
+    <div class="p-col-3"><span>DDE Final Rede (CD/Loja): </span> <span class="bold">{{resultSummary.dailyGridStock}}</span></div>
+</div>

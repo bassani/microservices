@@ -1,0 +1,12 @@
+<div class="card-container">
+  <div class="p-text p-ml-5 p-mt-5 forecast-title">Cadastro de forecast <strong>{{title}}</strong></div>
+    <p-card header="Ações" class="p-m-5" id="rd-card">
+      <div class="p-d-flex p-jc-start p-flex-wrap">
+      <rd-choice *ngIf="type == 'mensal'" (click)="getReprocess()" id="rd-choice-data" class="choice p-col-4 p-lg-4 p-md-6 p-sm-12" title="Reprocessar dados" content="Executa o processamento de dados novamente. Utilize essa função somente em caso de erro no processamento atual ou algum alteração/correção nos dados atuais." icon="pi-refresh"></rd-choice>
+      <rd-choice *ngIf="type == 'mensal'" (click)="getDownloadErrors()" id="rd-choice-error" class="choice p-col-4 p-lg-4 p-md-6 p-sm-12" title="Relatório de erros" content="Exporta um arquivo com todos os erros do último processamento caso este apresente algum erro." icon="pi-file"></rd-choice>
+      <rd-choice (click)="getDownloadCurrent()" id="rd-choice-registration" class="choice p-col-5 p-lg-4 p-md-6 p-sm-12" title="Parâmetros cadastrados" content="Exporta um arquivo com todos os cadastros atuais da ultima importação. Estes valores são os valores viegentes atualmente para o simulador." icon="pi-file-excel"></rd-choice>
+    </div>
+    </p-card>
+  
+  </div>
+  

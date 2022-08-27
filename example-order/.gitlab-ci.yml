@@ -1,0 +1,6 @@
+.healer-module:
+  variables:
+    MODULE: "example-order"
+  only:
+    changes:
+    - "example-order/**/*"

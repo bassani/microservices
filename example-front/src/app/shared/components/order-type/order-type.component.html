@@ -1,0 +1,12 @@
+<div class="simulation-content">
+  <div>
+    <label class="label p-ml-2">Tipo de {{simulations ? 'simulação' : 'pedido'}} {{fieldUtils.isRequired(control) ? '*' : ''}}</label>
+  </div>
+  <p-dropdown filterBy="name,id" [options]="(orderTypes$ | async)?.content || []" optionLabel="name" id="order-type-dropdown" placeholder="Selecione"
+    [filter]="true" [formControl]="control">
+    <ng-template let-option pTemplate="item">
+      <div class="country-item">
+          <div>{{option.id}} - {{option.name}}</div>
+      </div>
+    </ng-template></p-dropdown>
+</div>

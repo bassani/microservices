@@ -1,0 +1,105 @@
+<div class="main p-d-flex p-flex-column">
+  <div class="p-d-flex">
+    <div class="side p-d-flex p-flex-column">
+      <h3>Financeiro</h3>
+      <div class="p-d-flex content-side p-flex-column">
+          <div class="p-d-flex main-element">
+            <div class="financial-element">
+              <span>Impacto ciclo de caixa - Dia(s)</span>
+            </div>
+            <div *ngIf="resultSummary.impactCycleDays" class="financial-result">
+              <span class="bold">{{resultSummary.impactCycleDays}}</span>
+            </div>
+          </div>
+          <div class="p-d-flex main-element">
+            <div class="financial-element">
+              <span>Impacto ciclo de caixa - R$</span>
+            </div>
+            <div class="financial-result">
+              <span class="bold">{{resultSummary.impactCycleReals | currency: 'BRL'}}</span>
+            </div>
+          </div>
+          <div class="p-d-flex main-element">
+            <div class="financial-element">
+              <span>Margem LBC % (M-2)</span>
+            </div>
+            <div class="financial-result">
+              <span class="bold">-</span>
+            </div>
+          </div>
+          <div class="p-d-flex main-element">
+            <div class="financial-element">
+              <span>Pagamento regular</span>
+            </div>
+            <div class="financial-result">
+              <span class="bold">{{resultSummary.regularParameter | date: 'shortDate'}}</span>
+            </div>
+          </div>
+          <div class="p-d-flex main-element">
+            <div class="financial-element">
+              <span>Pagamento negociado</span>
+            </div>
+            <div class="financial-result">
+              <span class="bold">{{resultSummary.negotiateParameter | date: 'shortDate'}}</span>
+            </div>
+          </div>
+          <div class="p-d-flex main-element">
+            <div class="financial-element">
+              <span>Impacto fluxo de caixa</span>
+            </div>
+            <div class="financial-result">
+              <span class="bold">{{resultSummary.cashCycleImpact}}</span>
+            </div>
+          </div>
+        </div>
+    </div>
+    <p-divider layout="vertical"></p-divider>
+    <div class="side p-d-flex p-flex-column">
+      <h3>Perdas</h3>
+      <div class="p-d-flex content-side p-flex-column">
+        <div class="p-d-flex main-element">
+          <div class="financial-element">
+            <span>Saldo da perda - R$</span>
+          </div>
+          <div class="financial-result">
+            <span class="bold">-</span>
+          </div>
+        </div>
+        <div class="p-d-flex main-element">
+          <div class="financial-element">
+            <span>Perda bruta - R$</span>
+          </div>
+          <div class="financial-result">
+            <span class="bold">-</span>
+          </div>
+        </div>
+        <div class="p-d-flex main-element">
+          <div class="financial-element">
+            <span>Recuperação saldo (%)</span>
+          </div>
+          <div class="financial-result">
+            <span class="bold">-</span>
+          </div>
+        </div>
+        <div class="p-d-flex main-element">
+          <div class="financial-element">
+            <span>Política de perdas</span>
+          </div>
+          <div class="financial-result">
+            <span class="bold">-</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <p-divider class="p-mt-3 p-mb-3"></p-divider>
+
+
+  <div class="opb-main p-d-flex p-jc-center">
+    <a rel="noopener noreferrer" target="_blank" href="https://app.powerbi.com/groups/c4483e33-cc17-4ab3-a4d6-9479a2503b46/reports/c3e92a68-17fe-4a0b-bd7f-3c09812177a8/ReportSection">OTB (Open To Buy)</a>
+  </div>
+</div>
+
+

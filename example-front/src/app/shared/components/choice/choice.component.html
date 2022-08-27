@@ -1,0 +1,9 @@
+<p-card class="p-card rd-choice-card card styled-box-green" id="choice-container">
+  <div class="p-d-flex p-align-center">
+    <span *ngIf="svg; else pIcon" class="choice-icon-svg" [innerHtml]="svgIcon"></span>
+    <ng-template #pIcon>
+      <em id="choice-icon" [class]="'pi pi-fw  ' + icon"></em>
+    </ng-template>
+    <span id="choice-title" class="p-ml-1">{{title}}</span></div>
+  <p id="choice-content">{{content}}</p>
+</p-card>

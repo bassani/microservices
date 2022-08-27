@@ -1,0 +1,77 @@
+<p-menu #menu appendTo="body" [popup]="true" [model]="userMenu"></p-menu>
+<div class="nav">
+    <!-- NAV LOGO-->
+    <h2 class="nav-title">
+        <img src="/assets/imgs/logo_example.svg" alt="example" width="64px">
+    </h2>
+    <!-- NAV LOGO-->
+
+    <!-- NAV USERNAME AND ACTIONS -->
+    <div *ngIf="user; else loadingUser" class="main-nav-user p-d-flex p-ai-center">
+
+      <div class="nav-bell p-d-flex" (click)="showBellContainer=!showBellContainer">
+        <em class="pi pi-bell" [ngClass]="{'unread' : showRedDot}"></em>
+      </div>
+
+      <div class="nav-user p-d-flex p-ai-center" (click)="menu.toggle($event)">
+        <em class="pi pi-user"></em>
+        <span class="userName">{{user?.email}}</span>
+        <em class="pi pi-angle-down"></em>
+      </div>
+
+      <div *ngIf="showBellContainer" class="bellTip"></div>
+
+      <div *ngIf="showBellContainer" id="notifications">
+        <app-notifications
+          (modalNotification) = "startModal(true)"
+          (sortNotificationsType) = "sortNotificationType($event)"
+          (reloadNotifications) = "loadNotification(page, size, $event)"
+          [notifications] = "notifications"
+          [footerNotification] = true>
+        </app-notifications>
+      </div>
+
+      <div id="modalNotification" *ngIf="modalNotification && notifications.content.length > 0">
+        <div class="modal">
+          <app-notifications
+            (sortNotificationsType) = "sortNotificationType($event)"
+            (reloadNotifications) = "changePage(page, size, $event)"
+            [notifications] = "modalNotificationService">
+          </app-notifications>
+          <div class="pagination" *ngVar="(notificationsPagination$ | async) as state">
+            <p-paginator id="paginator"
+              [first]="state.number * state.size"
+              [rows]="state.size"
+              [totalRecords]="state.totalElements"
+              [rowsPerPageOptions]="[10,15,20]"
+              [showCurrentPageReport]="true"
+              (onPageChange)="paginate($event)"
+              currentPageReportTemplate="pág. {currentPage} de {totalPages}"
+              [showJumpToPageDropdown]="false" [showPageLinks]="false">
+              </p-paginator>
+          </div>
+        </div>
+        <div (click)="modalNotification=!modalNotification" class="overlay"></div>
+      </div>
+
+    </div>
+
+    <ng-template #loadingUser>
+        <div class="nav-user p-d-flex p-ai-center">
+            <p-progressSpinner [style]="{width: '48px', height: '48px'}" strokeWidth="6" ></p-progressSpinner>
+        </div>
+    </ng-template>
+    <!-- NAV USERNAME AND ACTIONS -->
+</div>
+<div class="container">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+    <!-- SIDEBAR -->
+    <!-- CONTENT -->
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+    <!-- CONTENT -->
+</div>

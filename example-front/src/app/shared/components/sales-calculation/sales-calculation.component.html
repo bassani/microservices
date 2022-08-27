@@ -1,0 +1,10 @@
+<label class="label">Base para cálculo {{fieldUtils.isRequired(control) ? '*' : ''}}</label>
+<p-cascadeSelect appendTo="body"  id="sales-base-cascade" placeholder="Teste" [options]="(salesCalculation$ | async) || []" optionLabel="name" optionGroupLabel="name" 
+    [optionGroupChildren]="['options']" [formControl]="control">
+    <ng-template pTemplate="value" let-value>
+      <div class="base-item" id="sales-base-result-label">
+          <span>{{optionText(value)}}</span>
+      </div>
+  </ng-template>
+  </p-cascadeSelect>
+

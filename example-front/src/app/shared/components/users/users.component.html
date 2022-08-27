@@ -1,0 +1,19 @@
+
+
+<label class="label" id="user-label">Usuário da simulação</label>
+<p-multiSelect class="full-width" id="user-select" #multiselect placeholder="Digite..."
+  [options]="(users$ | async)?.content || []" [filterValue]="''" optionLabel="firstName" filterBy="registrationNumber,firstName" [emptyMessage]="'Digite para pesquisar'"
+  [selectedItemsLabel]="'{0} usuários selecionados'"
+  [formControl]="control"
+  [maxSelectedLabels]="1"
+  >
+  <ng-template let-option pTemplate="item">
+    <div class="option-item" id="user-option">
+      <div>{{option.registrationNumber}} - {{option.firstName}}</div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="emptyfilter">
+      {{users$.value.status === 'LOAD' ? 'Carregando...' : 'Nenhum usuário encontrado'}}
+  </ng-template>
+
+</p-multiSelect>

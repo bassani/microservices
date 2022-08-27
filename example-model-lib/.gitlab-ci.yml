@@ -1,0 +1,6 @@
+.common-module:
+  variables:
+    MODULE: "example-model-lib"
+  only:
+    changes:
+    - "example-model-lib/**/*"

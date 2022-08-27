@@ -1,0 +1,54 @@
+<div class="p-d-flex p-flex-column p-ml-1" id="details-dialog-trigger" (click)="showDialog()">
+    <div class="p-d-flex">
+        <em class="pi pi-filter"></em>
+        <div class="p-text detailing p-ml-1">Filtrar produtos</div>
+    </div>
+
+    <div class="p-text hint-text" id="current-detailing-applied" *ngVar="selected as filters">
+        <div *ngIf="filters.length > 0; else noFilter" class="p-d-flex p-flex-column">
+            <div *ngFor="let filter of filters">- {{filter}}</div>
+        </div>
+        <ng-template #noFilter>
+            Nenhum filtro aplicado
+        </ng-template>
+    </div>
+
+</div>
+
+<p-dialog id="detailing-dialog" header="Filtrar Itens" [(visible)]="displayDialog" position="top"
+     [draggable]="false" [modal]="true" class="rounded-modal" [resizable]="false" [style]="{minWidth: '400px', maxWidth: '600px'}">
+        <!-- CHECKBOX INATIVOS-->   
+        <div class="p-d-flex p-ai-center">
+            <!-- SOMENTE INATIVOS-->
+            <div class="p-col-12">
+                <p-checkbox id="inactives-checkbox" value="true" [binary]="true" [ngModel]="getValue('inactive') == 'true'" (onChange)="checkInactives(true)" label="Somente produtos inativos"></p-checkbox>
+            </div>
+        </div>
+        <!-- CHECKBOX INATIVOS-->
+
+
+        <div class="p-d-flex p-ai-center p-jc-between p-flex-wrap" [formGroup]="cloneGroup">
+            <div  class="p-col-6 p-lg-6 p-md-6 p-sm-11">
+                <label for="temp">Inativo Temporário</label>
+                <p-dropdown id="temp" name="temp" class="full-width" [options]="temporaryInactivesOptions" placeholder="Selecione" formControlName="temporaryInactiveCode" [showClear]="true" optionValue="value" optionLabel="name"></p-dropdown>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-11">
+                <label for="promopacks">Promopacks</label>
+                <p-dropdown id="promopacks" name="promopacks" class="full-width" [options]="promopacksOptions" placeholder="Selecione" formControlName="promoPacks" [showClear]="true" optionValue="value" optionLabel="name"></p-dropdown>
+            </div>
+            <div class="p-col-6 p-lg-6 p-md-6 p-sm-11">
+                <label for="quoted">Cotados</label>
+                <p-dropdown [disabled]="deactivateQuoted" id="quoted" name="quoted" class="full-width" [options]="quotedOptions" placeholder="Selecione" formControlName="quoted" [showClear]="true" optionValue="value" optionLabel="name"></p-dropdown>
+            </div>
+        </div>
+
+
+    <p-footer>
+        <div class="p-d-flex p-jc-end button-grid p-mr-3">
+            <button pButton pRipple type="button" (click)="closeDialog()" label="Cancelar" icon="pi pi-times-circle"
+                class="btn p-button-rounded" id="detailing-modal-close"></button>
+            <button pButton pRipple type="button" (click)="saveDetailing()" label="Salvar" icon="pi pi-save"
+                class="btn p-button-success" id="detailing-modal-save"></button>
+        </div>
+    </p-footer>
+</p-dialog>

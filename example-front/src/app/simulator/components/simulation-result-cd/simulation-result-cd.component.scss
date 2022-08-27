@@ -1,0 +1,36 @@
+table {
+    min-width: 900px;
+}
+
+th {
+    font-size: 0.75rem;
+    color: #707070;
+    text-align: end;
+    vertical-align: bottom;
+}
+td {
+    font-size: 0.75em;
+    border: none
+}
+
+th, tr .left{
+    text-align: start;
+}
+th, tr .right {
+    text-align: end;
+}
+th, tr .center{
+    text-align: center;
+}
+
+.important-cell {
+    background: #f4f4f4;
+}
+
+.spaced-tr>th {
+    padding: 12px 0px
+}
+
+.whitespace-pre {
+    white-space: pre;
+}
